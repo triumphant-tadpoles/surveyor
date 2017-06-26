@@ -10,7 +10,7 @@
     "start": "node server/index.js",
     "heroku-postbuild": "webpack -p", 
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "export DATABASE_URL=postgresql://localhost:5432/surveyorDB && nodemon server/index.js"
   },
   "author": "Alexander Schnapp, Padma Govindarajalu, David Oh",
   "license": "ISC",
