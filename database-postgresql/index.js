@@ -1,8 +1,8 @@
 var pg = require('pg');
-var config = require('../config.js');
-console.log(config);
+// var config = require('../config.js');
 // 'process.env.DATABASE_URL' is avaialable in Heroku's environment, otherwise, obtain postgresUrl from this project's DB account.
-var postgresUrl = (process.env.DATABASE_URL || config.postgresUrl);
+// var postgresUrl = (process.env.DATABASE_URL || config.postgresUrl);
+var postgresUrl = (process.env.DATABASE_URL);
 
 
 // REFER TO https://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module
