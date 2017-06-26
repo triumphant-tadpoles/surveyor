@@ -12,8 +12,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    
-    alert('hi');
     $.ajax({
       url: '/items', 
       success: (data) => {
