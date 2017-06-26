@@ -1927,6 +1927,12 @@ object.omit@^2.0.0:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
 
+okay@~0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/okay/-/okay-0.3.0.tgz#de2840310df9805d6c0506d8dbb8d9ba09129d28"
+  dependencies:
+    sliced "0.0.5"
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -2052,6 +2058,13 @@ pg-pool@1.*:
     generic-pool "2.4.3"
     object-assign "4.1.0"
 
+pg-query@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/pg-query/-/pg-query-0.11.0.tgz#4997378865271640c0762349d01ca39be9e2d558"
+  dependencies:
+    okay "~0.3.0"
+    when "~3.1.0"
+
 pg-types@1.*:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/pg-types/-/pg-types-1.12.0.tgz#8ad3b7b897e3fd463e62de241ad5fc640b4a66f0"
@@ -2062,7 +2075,7 @@ pg-types@1.*:
     postgres-date "~1.0.0"
     postgres-interval "^1.1.0"
 
-pg@^6.4.0:
+pg@6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/pg/-/pg-6.4.0.tgz#cb76ba2e7c2eab89fc64bf7a9fe648ced72436dc"
   dependencies:
@@ -2483,6 +2496,10 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
+sliced@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/sliced/-/sliced-0.0.5.tgz#5edc044ca4eb6f7816d50ba2fc63e25d8fe4707f"
+
 sntp@1.x.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
@@ -2809,6 +2826,10 @@ webpack@^2.2.1:
 whatwg-fetch@>=0.10.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
+
+when@~3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/when/-/when-3.1.0.tgz#a2479659ca15f725541ecf52ebae091b781ee134"
 
 which-module@^1.0.0:
   version "1.0.0"
