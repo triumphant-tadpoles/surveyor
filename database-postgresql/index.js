@@ -6,7 +6,7 @@ var pg = require('pg');
 // ADDING 'pg.defaults.ssl = true;' IS IMPORTANT, OTHERWISE THERE WILL BE AN ERROR IN CONNECTION TO DB
   // BUT WHEN TESTING DURING DEV AND USING LOCAL DB, COMMENT IT OUT
 
-// pg.defaults.ssl = true;
+pg.defaults.ssl = true;
 module.exports = {
   query: function(text, cb) {
     pg.connect(process.env.DATABASE_URL, function(error, client) {
