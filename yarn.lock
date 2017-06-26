@@ -133,8 +133,8 @@ async-each@^1.0.0:
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
 async@^2.1.2:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.4.1.tgz#62a56b279c98a11d0987096a01cc3eeb8eb7bbd7"
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   dependencies:
     lodash "^4.14.0"
 
@@ -642,10 +642,6 @@ bcrypt-pbkdf@^1.0.0:
 big.js@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-3.1.3.tgz#4cada2193652eb3ca9ec8e55c9015669c9806978"
-
-bignumber.js@3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-3.1.2.tgz#f3bdb99ad5268a15fc1f0bed2fb018e2693fe236"
 
 binary-extensions@^1.0.0:
   version "1.8.0"
@@ -1579,10 +1575,6 @@ is-utf8@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
 
-isarray@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
-
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
@@ -1718,6 +1710,10 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
   dependencies:
     js-tokens "^3.0.0"
 
+manakin@0.4:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/manakin/-/manakin-0.4.7.tgz#41ca449b55bea9c4c4fecec393b9c4d63818fc3f"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -1807,14 +1803,6 @@ minimist@^1.2.0:
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
-
-mysql@^2.13.0:
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/mysql/-/mysql-2.13.0.tgz#998f1f8ca46e2e3dd7149ce982413653986aae47"
-  dependencies:
-    bignumber.js "3.1.2"
-    readable-stream "1.1.14"
-    sqlstring "2.2.0"
 
 nan@^2.3.0:
   version "2.6.2"
@@ -1926,12 +1914,6 @@ object.omit@^2.0.0:
   dependencies:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
-
-okay@~0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/okay/-/okay-0.3.0.tgz#de2840310df9805d6c0506d8dbb8d9ba09129d28"
-  dependencies:
-    sliced "0.0.5"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -2051,6 +2033,10 @@ pg-connection-string@0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-0.1.3.tgz#da1847b20940e42ee1492beaf65d49d91b245df7"
 
+pg-minify@0.4:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/pg-minify/-/pg-minify-0.4.2.tgz#c75b4b5878960fb09c3b9a4d4eb1036aea7ea0e3"
+
 pg-pool@1.*:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-1.8.0.tgz#f7ec73824c37a03f076f51bfdf70e340147c4f37"
@@ -2058,12 +2044,14 @@ pg-pool@1.*:
     generic-pool "2.4.3"
     object-assign "4.1.0"
 
-pg-query@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/pg-query/-/pg-query-0.11.0.tgz#4997378865271640c0762349d01ca39be9e2d558"
+pg-promise@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-6.1.1.tgz#9f26049b41e463635d3ee459c7955135ee3a059f"
   dependencies:
-    okay "~0.3.0"
-    when "~3.1.0"
+    manakin "0.4"
+    pg "^6.4.0"
+    pg-minify "0.4"
+    spex "1.2"
 
 pg-types@1.*:
   version "1.12.0"
@@ -2075,7 +2063,7 @@ pg-types@1.*:
     postgres-date "~1.0.0"
     postgres-interval "^1.1.0"
 
-pg@6.4.0:
+pg@6.4.0, pg@^6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/pg/-/pg-6.4.0.tgz#cb76ba2e7c2eab89fc64bf7a9fe648ced72436dc"
   dependencies:
@@ -2268,15 +2256,6 @@ read-pkg@^1.0.0:
     load-json-file "^1.0.0"
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
-
-readable-stream@1.1.14:
-  version "1.1.14"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
-  dependencies:
-    core-util-is "~1.0.0"
-    inherits "~2.0.1"
-    isarray "0.0.1"
-    string_decoder "~0.10.x"
 
 readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.6:
   version "2.3.2"
@@ -2496,10 +2475,6 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-sliced@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/sliced/-/sliced-0.0.5.tgz#5edc044ca4eb6f7816d50ba2fc63e25d8fe4707f"
-
 sntp@1.x.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
@@ -2534,15 +2509,15 @@ spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
 
+spex@1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/spex/-/spex-1.2.0.tgz#6264b3b8acbc444477f06dbb66d425c0ee1074c0"
+
 split@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/split/-/split-1.0.0.tgz#c4395ce683abcd254bc28fe1dabb6e5c27dcffae"
   dependencies:
     through "2"
-
-sqlstring@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/sqlstring/-/sqlstring-2.2.0.tgz#c3135c4ea8abcd7e7ee741a4966a891d86a4f191"
 
 sshpk@^1.7.0:
   version "1.13.1"
@@ -2591,7 +2566,7 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^1.0.0"
     strip-ansi "^3.0.0"
 
-string_decoder@^0.10.25, string_decoder@~0.10.x:
+string_decoder@^0.10.25:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
@@ -2826,10 +2801,6 @@ webpack@^2.2.1:
 whatwg-fetch@>=0.10.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
-
-when@~3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/when/-/when-3.1.0.tgz#a2479659ca15f725541ecf52ebae091b781ee134"
 
 which-module@^1.0.0:
   version "1.0.0"
