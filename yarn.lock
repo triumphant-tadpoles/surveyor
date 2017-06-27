@@ -1305,6 +1305,12 @@ generic-pool@2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-2.4.3.tgz#780c36f69dfad05a5a045dd37be7adca11a4f6ff"
 
+geoip2@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/geoip2/-/geoip2-1.0.5.tgz#3bee6f33040a410ba6fde7e971b2a63008d71de2"
+  dependencies:
+    nan "2.3.5"
+
 get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
@@ -1803,6 +1809,10 @@ minimist@^1.2.0:
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+
+nan@2.3.5:
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.3.5.tgz#822a0dc266290ce4cd3a12282ca3e7e364668a08"
 
 nan@^2.3.0:
   version "2.6.2"
