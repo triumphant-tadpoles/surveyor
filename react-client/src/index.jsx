@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import JobList from './components/JobList.jsx';
 import JobListItem from './components/JobListItem.jsx';
+import Loading from './components/Loading.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,14 +12,17 @@ class App extends React.Component {
     this.state = {
       jobs: [],
       technology: '',
-      showJobs: false,
-      showSearch: false,
       view: 'search'
     };
     this.onSearch = this.onSearch.bind(this);
   }
 
   onSearch(tech) {
+    this.setState({
+      view: 'loading'
+    })
+
+
     console.log('onSearch..');
     fetch('/', {
       method: 'POST',
@@ -27,42 +31,43 @@ class App extends React.Component {
     .then((response) => {
       return response.json();
     }).then(result => {
+      if (result.error) {
+        throw err;
+      }
+
       console.log('Client: Data from server: ', result);
       this.setState({
         jobs: result.results,
-        showJobs: true,
-        showSearch: false,
         view: 'jobs'
       });
     })
     .catch((err) => {
-      console.log('ERROR:', err);
+      this.setState({
+        view: 'search'
+      })
+      console.log('ERROR');
     })
     // get the data, set jobs state
     // render list component
+
   }
 
 
-  testdb() {
-    console.log('testdb run');
-    fetch('/testdb', {
-      method: 'GET',
-    }).then(response => {
-      return response.json();
-    }).then(rjson => {
-      console.log(rjson);
-    });
-  }
+
+
+
+
 
   componentDidMount(props) {
-    this.testdb();
   }
 
   render () {
     return (
       <div>
         <div> <h1> Surveyor </h1></div>
-        {this.state.view === 'search' 
+        {this.state.view === 'loading'
+          ? <Loading/>
+          : this.state.view === 'search' 
           ? <Search onSearch = {this.onSearch}/>
           : this.state.view === 'jobs'
           ? <JobList jobList = {this.state.jobs}/>
