@@ -33,19 +33,16 @@ class App extends React.Component {
   }
 
 
-  testdb() {
+  componentDidMount(props) {
     console.log('testdb run');
     fetch('/testdb', {
       method: 'GET',
     }).then(response => {
+      console.log('fetch then');
       return response.json();
     }).then(rjson => {
       console.log(rjson);
     });
-  }
-
-  componentDidMount(props) {
-    this.testdb();
   }
 
   render () {
