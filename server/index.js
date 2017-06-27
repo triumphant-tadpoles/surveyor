@@ -2,9 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const externals = require('./externals.js');
 
-const pg = require('pg');
 const pgp = require('pg-promise')();
-pg.defaults.ssl = true;
+pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
 const app = express();
