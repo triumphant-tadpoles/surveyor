@@ -4,6 +4,12 @@
   "scripts": {
   },
   "env": {
+    "DATABASE_URL": {
+      "required": true
+    },
+    "INDEED": {
+      "required": true
+    }
   },
   "formation": {
   },
