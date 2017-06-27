@@ -9,35 +9,21 @@ class App extends React.Component {
     this.state = { 
       items: []
     }
-    this.testdb();
   }
 
   testdb() {
     console.log('testdb run');
-    $.ajax({
-      url: '/testdb',
-      type: 'GET',
-      success: (data) => {
-        console.log(data)
-      },
-      error: () => {
-        console.log('error in getting data');
-      }
+    fetch('/testdb', {
+      method: 'GET',
+    }).then(response => {
+      return response.json();
+    }).then(rjson => {
+      console.log(rjson);
     });
   }
 
-  componentDidMount() {
-    // $.ajax({
-    //   url: '/',
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
+  componentDidMount(props) {
+    this.testdb();
   }
 
   render () {
