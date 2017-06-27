@@ -13,11 +13,15 @@ class App extends React.Component {
   }
 
   testdb() {
+    console.log('testdb run');
     $.ajax({
       url: '/testdb',
       type: 'GET',
       success: (data) => {
         console.log(data)
+      },
+      error: () => {
+        console.log('error in getting data');
       }
     });
   }
