@@ -2,19 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
-import List from './components/List.jsx';
+import JobList from './components/JobList.jsx';
+import JobListItem from './components/JobListItem.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       jobs: [],
-      technology: ''
+      technology: '',
+      showJobs: false,
+      showSearch: false,
+      view: 'search'
     };
     this.onSearch = this.onSearch.bind(this);
   }
 
   onSearch(tech) {
+    console.log('onSearch..');
     fetch('/', {
       method: 'POST',
       body: tech
@@ -23,7 +28,12 @@ class App extends React.Component {
       return response.json();
     }).then(result => {
       console.log('Client: Data from server: ', result);
-      console.log(result);
+      this.setState({
+        jobs: result.results,
+        showJobs: true,
+        showSearch: false,
+        view: 'jobs'
+      });
     })
     .catch((err) => {
       console.log('ERROR:', err);
@@ -51,7 +61,13 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Search onSearch = {this.onSearch}/>
+        <div> <h1> Surveyor </h1></div>
+        {this.state.view === 'search' 
+          ? <Search onSearch = {this.onSearch}/>
+          : this.state.view === 'jobs'
+          ? <JobList jobList = {this.state.jobs}/>
+          : null
+        }
       </div>)
   }
 }
