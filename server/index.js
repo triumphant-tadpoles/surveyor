@@ -4,7 +4,7 @@ const externals = require('./externals.js');
 
 const pg = require('pg');
 const pgp = require('pg-promise')();
-// pg.defaults.ssl = true;
+pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
 const app = express();
@@ -13,6 +13,20 @@ app.set('port', (process.env.PORT || 5000));
 
 app.listen(app.get('port'), function() {
   console.log('listening on port', app.get('port'));
+});
+
+app.get('/testdb', (req, res) => {
+  const allUsers = [];
+  db.query('SELECT * FROM users')
+    .then(data => {
+      data.forEach(user => {
+        console.log(user.username)
+        allUsers.push(user.username);
+      })
+    })
+    .then(() => {
+      res.send(allUsers);    
+    });
 });
 
 app.post('/', (req, res, next) => {
