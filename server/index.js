@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const externals = require('./externals.js');
 
-const pgp = require('pg-promise')();
-pgp.pg.defaults.ssl = true;
-const db = pgp(process.env.DATABASE_URL);
+// const pgp = require('pg-promise')();
+// pgp.pg.defaults.ssl = true;
+// const db = pgp(process.env.DATABASE_URL);
 
 const app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -14,18 +14,33 @@ app.listen(app.get('port'), function() {
   console.log('listening on port', app.get('port'));
 });
 
+// app.get('/testdb', (req, res) => {
+//   const allUsers = [];
+//   db.query('SELECT * FROM users')
+//     .then(data => {
+//       data.forEach(user => {
+//         allUsers.push(user.username);
+//       })
+//     })
+//     .then(() => {
+//       res.send(allUsers);    
+//     });
+// });
+
+var pg = require('pg');
+pg.defaults.ssl = true;
+
 app.get('/testdb', (req, res) => {
-  const allUsers = [];
-  db.query('SELECT * FROM users')
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+
+  client
+    .query('SELECT * FROM users')
     .then(data => {
-      data.forEach(user => {
-        allUsers.push(user.username);
-      })
-    })
-    .then(() => {
-      res.send(allUsers);    
+      res.send(JSON.stringify(data.rows));
     });
+  });
 });
+
 
 app.post('/', (req, res, next) => {
   console.log(req.ip);
