@@ -4,7 +4,9 @@ const externals = require('./externals.js');
 
 const pgp = require('pg-promise')();
 pgp.pg.defaults.ssl = true;
-const db = pgp(process.env.DATABASE_URL);
+var test = 'postgres://agxuzccrrsfkpa:9999dac07e4813c62f92a34e77195b59b924cb1c8289024736a827d177666fd8@ec2-54-204-32-145.compute-1.amazonaws.com:5432/daja4bvkkib521';
+// const db = pgp(process.env.DATABASE_URL);
+const db = pgp(test);
 
 const app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -19,7 +21,6 @@ app.get('/testdb', (req, res) => {
   db.query('SELECT * FROM users')
     .then(data => {
       data.forEach(user => {
-        console.log(user.username)
         allUsers.push(user.username);
       })
     })
@@ -34,7 +35,7 @@ app.post('/', (req, res, next) => {
 });
 
 // BELOW IS A TEST QUERY TESTING CONNECTION TO EITHER HEROKU'S OR LOCAL CONNECTION TO POSTGRES DB
-db.query('SELECT * FROM users')
-  .then(data => {
-    console.log(data);
-  });
+// db.query('SELECT * FROM users')
+//   .then(data => {
+//     console.log(data);
+//   });
