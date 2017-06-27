@@ -19,7 +19,6 @@ app.get('/testdb', (req, res) => {
   db.query('SELECT * FROM users')
     .then(data => {
       data.forEach(user => {
-        console.log(user.username)
         allUsers.push(user.username);
       })
     })
@@ -34,7 +33,7 @@ app.post('/', (req, res, next) => {
 });
 
 // BELOW IS A TEST QUERY TESTING CONNECTION TO EITHER HEROKU'S OR LOCAL CONNECTION TO POSTGRES DB
-db.query('SELECT * FROM users')
-  .then(data => {
-    console.log(data);
-  });
+// db.query('SELECT * FROM users')
+//   .then(data => {
+//     console.log(data);
+//   });
