@@ -29,7 +29,6 @@ app.get('/testdb', (req, res) => {
 });
 
 app.post('/', (req, res, next) => {
-  console.log(req.ip);
   externals.indeed(req, res, next);
 });
 
