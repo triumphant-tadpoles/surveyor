@@ -19,6 +19,7 @@ module.exports.indeed = (req, res, next) => {
      indeedFetch(req, res, next, ip, chunk); 
     }).catch(error => {
       indeedFetch(req, res, next, ip, chunk);
+      console.log('///////////', ip, error);
     });
   });
 }
