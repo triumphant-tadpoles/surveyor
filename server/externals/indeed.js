@@ -2,6 +2,7 @@ const bluebird = require('bluebird');
 const express = require('express');
 const fetch = require('isomorphic-fetch');
 const geoip2 = require('geoip2');
+const bodyParser = require('body-parser');
 const indeed = process.env.INDEED;
 
 module.exports.indeed = (req, res, next) => {
