@@ -5,6 +5,7 @@ import Search from './components/Search.jsx';
 import JobList from './components/JobList.jsx';
 import JobListItem from './components/JobListItem.jsx';
 import Loading from './components/Loading.jsx';
+import Dropzone from 'react-dropzone';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class App extends React.Component {
     this.state = {
       jobs: [],
       technology: '',
-      view: 'search'
+      view: 'search',
+      files: [],
+      dropzoneActive: false
     };
     this.onSearch = this.onSearch.bind(this);
   }
@@ -46,22 +49,68 @@ class App extends React.Component {
     })
   }
 
+  onDragEnter() {
+    console.log('enter')
+    this.setState({
+      dropzoneActive: true
+    });
+  }
+
+  onDragLeave() {
+    console.log('leave')
+    this.setState({
+      dropzoneActive: false
+    });
+  }
+
+  onDrop(files) {
+    console.log(files);
+    this.setState({
+      files,
+      dropzoneActive: false
+    });
+    console.log(files);
+  }
+
   componentDidMount(props) {
   }
 
   render () {
+    const { accept, files, dropzoneActive } = this.state;
+    const overlayStyle = {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      padding: '2.5em 0',
+      background: 'rgba(0,0,0,0.5)',
+      textAlign: 'center',
+      color: '#fff'
+    };
     return (
-      <div>
-        <div> <h1> Surveyor </h1></div>
-        {this.state.view === 'loading'
-          ? <Loading/>
-          : this.state.view === 'search' 
-          ? <Search onSearch = {this.onSearch}/>
-          : this.state.view === 'jobs'
-          ? <JobList jobList = {this.state.jobs}/>
-          : null
-        }
-      </div>)
+      <Dropzone
+        disableClick
+        style={{}}
+        accept={accept}
+        onDrop={this.onDrop.bind(this)}
+        onDragEnter={this.onDragEnter.bind(this)}
+        onDragLeave={this.onDragLeave.bind(this)}
+      >
+        { dropzoneActive && <div style={overlayStyle}>Drop files...</div> }
+        <div>
+          <div> <h1> Surveyor </h1></div>
+          {this.state.view === 'loading'
+            ? <Loading/>
+            : this.state.view === 'search' 
+            ? <Search onSearch = {this.onSearch}/>
+            : this.state.view === 'jobs'
+            ? <JobList jobList = {this.state.jobs}/>
+            : null
+          }
+        </div>
+      </Dropzone>
+    )
   }
 }
 
