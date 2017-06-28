@@ -6,7 +6,7 @@ const indeed = process.env.INDEED;
 
 module.exports.indeed = (req, res, next) => {
   let chunk = '';
-  let ip = 94110
+  let zip = 94110
   console.log(req.headers['x-forwarded-for']);
   req.on('data', data => {
     chunk += data;
@@ -14,19 +14,19 @@ module.exports.indeed = (req, res, next) => {
   req.on('end', () => {
     console.log(chunk);
     ipLookup(req.headers['x-forwarded-for']).then((result) => {
-     ip = result.postal;
-     console.log('///////////', ip, result);
-     indeedFetch(req, res, next, ip, chunk); 
+     zip = result.postal;
+     console.log('///////////adsfadsf', zip, result);
+     indeedFetch(req, res, next, zip, chunk); 
     }).catch(error => {
-      indeedFetch(req, res, next, ip, chunk);
-      console.log('///////////', ip, error);
+      indeedFetch(req, res, next, zip, chunk);
+      console.log('///////////', zip, error);
     });
   });
 }
 
-let indeedFetch = (req, res, next, ip, query) => {
-  console.log(ip);
-  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&i=${ip}&userAgent=${req.get('user-agent')}&limit=50`, {
+let indeedFetch = (req, res, next, zip, query) => {
+  console.log(zip);
+  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&I=${zip}&userAgent=${req.get('user-agent')}&limit=50`, {
     method: 'GET'
   }).then((response, error) =>{
     if (error) throw error;
