@@ -14,7 +14,7 @@ class App extends React.Component {
       jobs: [],
       technology: '',
       view: 'search',
-      files: [],
+      //files: [],
       dropzoneActive: false
     };
     this.onSearch = this.onSearch.bind(this);
@@ -63,13 +63,33 @@ class App extends React.Component {
     });
   }
 
-  onDrop(files) {
-    console.log(files);
-    this.setState({
-      files,
-      dropzoneActive: false
-    });
-    console.log(files);
+    onDrop(files) {
+      console.log('files...', files);
+      let formData  = new FormData();
+      formData.append('file', files[0]);
+      this.setState({
+        dropzoneActive: false
+      });
+      fetch('/resume/jobs', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        console.log('RESPONSE', response);
+        return response.json();
+      })
+      .then(result => {
+        if (result.error) {
+          throw err;
+        }
+        this.setState({
+          jobs: result.results,
+          view: 'jobs'
+        });
+      })
+      .catch(err => {
+        console.log('ERROR:', err);
+      })
   }
 
   componentDidMount(props) {
@@ -83,7 +103,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { accept, files, dropzoneActive } = this.state;
+    const { accept, dropzoneActive } = this.state;
     const overlayStyle = {
       position: 'absolute',
       top: 0,
