@@ -18,12 +18,17 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <input placeholder="technology.." onChange={(e)=> {this.setState({technology: e.target.value})}} type="text"/>
-        <button onClick={this.search}>Search</button>
+        <form className="ui form">
+        <div className="inline fields">
+          <div className="two wide field">
+            <input placeholder="technology.." onChange={(e)=> {this.setState({technology: e.target.value})}} type="text"/>
+            <button className="ui blue button small" onClick={this.search}>Search</button>
+          </div>
+        </div>
+        </form>
       </div>
     );
   }
 };
-//asjlkdfaksdfjalsjd
 
 export default Search;
