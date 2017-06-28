@@ -6,7 +6,6 @@ const indeed = process.env.INDEED;
 
 module.exports.indeed = (req, res, next) => {
   let chunk = '';
-  let zip = 94110
   let city = 'san francisco';
   let state = 'CA';
   console.log(req.headers['x-forwarded-for']);
@@ -15,9 +14,6 @@ module.exports.indeed = (req, res, next) => {
   });
   req.on('end', () => {
     ipLookup(req.headers['x-forwarded-for']).then((result) => {
-     zip = result.postal;
-     city = result.city;
-     state = result.subdivision;
      indeedFetch(req, res, next, result.city, result.subdivision, chunk); 
     }).catch(error => {
       indeedFetch(req, res, next, city, state, chunk);
