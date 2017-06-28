@@ -15,6 +15,7 @@ module.exports.indeed = (req, res, next) => {
     console.log(chunk);
     ipLookup(req.headers['x-forwarded-for']).then((result) => {
      ip = result.postal;
+     console.log('///////////', ip, result);
      indeedFetch(req, res, next, ip, chunk); 
     }).catch(error => {
       indeedFetch(req, res, next, ip, chunk);
