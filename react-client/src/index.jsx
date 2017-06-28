@@ -100,10 +100,9 @@ class App extends React.Component {
         { dropzoneActive && <div style={overlayStyle}>Drop files...</div> }
         <div>
           <div> <h1> Surveyor </h1></div>
+          <Search onSearch = {this.onSearch}/>
           {this.state.view === 'loading'
             ? <Loading/>
-            : this.state.view === 'search' 
-            ? <Search onSearch = {this.onSearch}/>
             : this.state.view === 'jobs'
             ? <JobList jobList = {this.state.jobs}/>
             : null
