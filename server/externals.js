@@ -45,7 +45,7 @@ let indeedFetch = (req, res, next, city, state, query) => {
 
 let ipLookup = ip => {
   return new Promise((reject, resolve) => {
-      geoip2.lookupSimple(ip, (error, result) => {
+      geoip2.lookupSimple(ip, (result, error) => {
         if (error) reject(error);
         else resolve(result);
       });
