@@ -22,20 +22,17 @@ class App extends React.Component {
       view: 'loading'
     })
 
-
-    console.log('onSearch..');
     fetch('/', {
       method: 'POST',
       body: tech
     })
     .then((response) => {
       return response.json();
-    }).then(result => {
+    })
+    .then(result => {
       if (result.error) {
         throw err;
       }
-
-      console.log('Client: Data from server: ', result);
       this.setState({
         jobs: result.results,
         view: 'jobs'
@@ -47,16 +44,7 @@ class App extends React.Component {
       })
       console.log('ERROR');
     })
-    // get the data, set jobs state
-    // render list component
-
   }
-
-
-
-
-
-
 
   componentDidMount(props) {
   }

@@ -3,15 +3,31 @@ import React from 'react';
 class JobListItem extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log('JobListItem..', this.props.jobListItem);
+		// console.log('JobListItem..', this.props.jobListItem);
 	}
 
 	render() {
 		return (
-			<div>
-				{this.props.jobListItem.jobtitle}
-				{this.props.jobListItem.company}
-				{this.props.jobListItem.snippet}
+			<div className="card">
+				<div className="content">
+					<div className="header">
+						<a href={this.props.jobListItem.url}>
+							{this.props.jobListItem.jobtitle}
+						</a>
+					</div>
+					<div className="content">
+						<div className="header">
+							<b>{this.props.jobListItem.company}</b> &nbsp;&nbsp;&nbsp;&nbsp;
+									<span className="meta">{this.props.jobListItem.formattedLocation} </span>
+						</div>
+						<div className="description">
+							{this.props.jobListItem.snippet}
+						</div>
+						<div className="meta">
+							{this.props.jobListItem.formattedRelativeTime} 
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	};

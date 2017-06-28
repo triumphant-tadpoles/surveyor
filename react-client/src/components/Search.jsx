@@ -11,16 +11,17 @@ class Search extends React.Component {
 
   search(e) {
     e.preventDefault();
-    console.log('search component technology=', this.state.technology);
     this.props.onSearch(this.state.technology);
   }
 
   render() {
     return (
       <div>
+      <div> &nbsp; </div>
+      <div> &nbsp; </div>
         <form className="ui form">
         <div className="inline fields">
-          <div className="two wide field">
+          <div className="five wide field">
             <input placeholder="technology.." onChange={(e)=> {this.setState({technology: e.target.value})}} type="text"/>
             <button className="ui blue button small" onClick={this.search}>Search</button>
           </div>
