@@ -26,7 +26,7 @@ module.exports.indeed = (req, res, next) => {
 }
 
 let indeedFetch = (req, res, next, city, state, query) => {
-  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&l=${city}%2C+${state}&userAgent=${req.get('user-agent')}&limit=100&fromage=10`, {
+  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&l=${city}%2C+${state}&userAgent=${req.get('user-agent')}&limit=100&fromage=50`, {
     method: 'GET'
   }).then((response, error) =>{
     if (error) throw error;
