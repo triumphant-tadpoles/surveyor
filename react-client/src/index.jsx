@@ -73,7 +73,7 @@ class App extends React.Component {
   }
 
   componentDidMount(props) {
-    fetch('/testdb', {
+    fetch('/testDB', {
       method: 'GET'
     }).then(response => {
       return response.json();
