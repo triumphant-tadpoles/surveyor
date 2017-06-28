@@ -14,22 +14,19 @@ module.exports.indeed = (req, res, next) => {
     chunk += data;
   });
   req.on('end', () => {
-    console.log(chunk);
     ipLookup(req.headers['x-forwarded-for']).then((result) => {
      zip = result.postal;
      city = result.city;
      state = result.subdivision;
-     console.log('///////////adsfadsf', city, state, result);
      indeedFetch(req, res, next, result.city, result.subdivision, chunk); 
     }).catch(error => {
       indeedFetch(req, res, next, city, state, chunk);
-      console.log('///////////', city, state, error);
     });
   });
 }
 
 let indeedFetch = (req, res, next, city, state, query) => {
-  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&l=${city}%2C+${state}&userAgent=${req.get('user-agent')}&limit=50&fromage=10`, {
+  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&l=${city}%2C+${state}&userAgent=${req.get('user-agent')}&limit=200&fromage=10`, {
     method: 'GET'
   }).then((response, error) =>{
     if (error) throw error;
