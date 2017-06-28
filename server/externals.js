@@ -6,24 +6,23 @@ const indeed = process.env.INDEED;
 
 module.exports.indeed = (req, res, next) => {
   let chunk = '';
-  let ip = 94110
+  let city = 'san francisco';
+  let state = 'CA';
   console.log(req.headers['x-forwarded-for']);
   req.on('data', data => {
     chunk += data;
   });
   req.on('end', () => {
-    console.log(chunk);
     ipLookup(req.headers['x-forwarded-for']).then((result) => {
-     ip = result.postal;
-     indeedFetch(req, res, next, ip, chunk); 
+     indeedFetch(req, res, next, result.city, result.subdivision, chunk); 
     }).catch(error => {
-      indeedFetch(req, res, next, ip, chunk);
+      indeedFetch(req, res, next, city, state, chunk);
     });
   });
 }
 
-let indeedFetch = (req, res, next, ip, query) => {
-  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&i=${ip}&userAgent=${req.get('user-agent')}`, {
+let indeedFetch = (req, res, next, city, state, query) => {
+  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&l=${city}%2C+${state}&userAgent=${req.get('user-agent')}&limit=100&fromage=10&radius=100`, {
     method: 'GET'
   }).then((response, error) =>{
     if (error) throw error;
@@ -39,7 +38,7 @@ let indeedFetch = (req, res, next, ip, query) => {
 
 let ipLookup = ip => {
   return new Promise((reject, resolve) => {
-      geoip2.lookupSimple(ip, (error, result) => {
+      geoip2.lookupSimple(ip, (result, error) => {
         if (error) reject(error);
         else resolve(result);
       });
