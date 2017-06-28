@@ -28,14 +28,17 @@
     "babel-preset-react": "^6.23.0",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
+    "bower": "^1.8.0",
     "express": "^4.15.0",
     "geoip2": "^1.0.5",
     "jquery": "^3.1.1",
     "pg-promise": "^6.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-dropzone": "^3.13.3",
     "request-promise": "^4.2.1",
     "underscore": "^1.8.3",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "wintersmith": "^2.4.1"
   }
 }
