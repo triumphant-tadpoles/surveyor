@@ -20,7 +20,7 @@ module.exports.indeed = (req, res, next) => {
      city = result.city;
      state = result.subdivision;
      console.log('///////////adsfadsf', city, state, result);
-     indeedFetch(req, res, next, city, state, chunk); 
+     indeedFetch(req, res, next, result.city, result.subdivision, chunk); 
     }).catch(error => {
       indeedFetch(req, res, next, city, state, chunk);
       console.log('///////////', city, state, error);
