@@ -3,16 +3,13 @@ const bodyParser = require('body-parser');
 const indeed = require('./externals/indeed.js');
 const dbTest = require('../database-postgresql/index.js');
 const multer = require('multer');
-
 const upload = multer();
-const pgp = require('pg-promise')();
-const passport = require('passport')
-const FacebookStrategy = require('passport-facebook').Strategy;
 
+const pgp = require('pg-promise')();
+pgp.pg.defaults.ssl = true;
+const db = pgp(process.env.DATABASE_URL);
 
 const app = express();
-
-// pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.set('port', (process.env.PORT || 5000));
@@ -21,38 +18,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.listen(app.get('port'), function() {
-  console.log('listening on port', app.get('port'));
-});
-
-
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
-
-
-passport.use(new FacebookStrategy({
-  clientID: '134148277165166',
-  clientSecret: '3fbbeaebf4c4912f6c428292089080b9',
-  callbackURL: 'http://localhost:5000/auth/facebook/callback',
-  profileFields: ['id', 'displayName', 'photos'],
-},
-function(accessToken, refreshToken, profile, cb) {
-  return cb(null, profile);
-}));
-
-
 
 app.post('/', (req, res, next) => {
   let userReq = {
@@ -81,14 +46,10 @@ app.get('/results', require('connect-ensure-login').ensureLoggedIn(),
           });
       })
 
+app.listen(app.get('port'), function() {
+  console.log('listening on port', app.get('port'));
+});
 
-    res.send()
-  }
-);
-
-
-app.get('/auth/facebook', passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/results',
-                                      failureRedirect: '/login' }));
+app.post('/', (req, res, next) => {
+  indeed.indeed(req, res, next);
+});

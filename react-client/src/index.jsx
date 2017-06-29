@@ -78,13 +78,8 @@ class App extends React.Component {
     console.log(files);
   }
 
-  onLogin() {
-    fetch('/auth/facebook', {
-      method: 'GET'
-    })
-    .then(result => {
-      console.log(result);
-    })
+  onLogin(loginData) {
+    console.log('woo! login data: ', loginData);
   }
 
   componentDidMount(props) {
