@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.set('port', (process.env.PORT || 5000));
 
 const pgp = require('pg-promise')();
-pgp.pg.defaults.ssl = false;
+pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
 app.use(bodyParser.urlencoded({
