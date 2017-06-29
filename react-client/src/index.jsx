@@ -75,7 +75,12 @@ class App extends React.Component {
   }
 
   onLogin() {
-    console.log('logged in')
+    fetch('/auth/facebook', {
+      method: 'GET'
+    })
+    .then(result => {
+      console.log(result);
+    })
   }
 
   componentDidMount(props) {

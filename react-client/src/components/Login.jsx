@@ -7,9 +7,9 @@ class Login extends React.Component {
 
   render() {
     return(
-      <form action="/auth/facebook">
+      <div>
         <input type="submit" value="Log In" onClick={this.props.onLogin}></input>
-      </form>
+      </div>
     )
   }
 }
