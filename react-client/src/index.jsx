@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import JobList from './components/JobList.jsx';
 import JobListItem from './components/JobListItem.jsx';
-import Login from './components/login.jsx';
+import Login from './components/Login.jsx';
 import Loading from './components/Loading.jsx';
 import Dropzone from 'react-dropzone';
 
