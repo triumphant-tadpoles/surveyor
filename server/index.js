@@ -2,9 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const indeed = require('./externals/indeed.js');
 const db = require('../database-postgresql/index.js');
-const multer = require('multer');
-
-const upload = multer();
 
 const app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
