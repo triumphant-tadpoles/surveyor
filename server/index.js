@@ -29,22 +29,22 @@ app.post('/', (req, res, next) => {
   indeed.indeed(userReq, res, next);
 });
 
-app.get('/results', require('connect-ensure-login').ensureLoggedIn(),
-  (req, res) => {
-    db.query(`SELECT * FROM users WHERE facebook_id = '${req.user.id}'`)
-      .then(result => {
-        return result[0].id;
-      })
-      .then(user_id => {
-        db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
-          .then(result => {
-            //call indeed with prev query
-            //res.send results
-            //set up app.get '/'
-            
-            res.send(result[0].marked_up_json);
-          });
-      })
+app.get('/results', (req, res) => {
+  db.query(`SELECT * FROM users WHERE facebook_id = '${req.user.id}'`)
+    .then(result => {
+      return result[0].id;
+    })
+    .then(user_id => {
+      db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
+        .then(result => {
+          //call indeed with prev query
+          //res.send results
+          //set up app.get '/'
+          
+          res.send(result[0].marked_up_json);
+        });
+    });
+});
 
 app.listen(app.get('port'), function() {
   console.log('listening on port', app.get('port'));
