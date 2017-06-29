@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const indeed = require('./externals/indeed.js');
 const db = require('../database-postgresql/index.js');
 const multer = require('multer');
-const watson = require('./externals/ibm-watson.js');
+//const watson = require('./externals/ibm-watson.js');
 
 //const upload = multer();
 var upload = multer({dest:'uploads/'});
