@@ -14,7 +14,6 @@ class App extends React.Component {
       jobs: [],
       technology: '',
       view: 'search',
-      //files: [],
       dropzoneActive: false
     };
     this.onSearch = this.onSearch.bind(this);
@@ -73,6 +72,7 @@ class App extends React.Component {
       fetch('/resume/jobs', {
         method: 'POST',
         body: formData
+        //body: JSON.stringify(files[0])
       })
       .then(response => {
         console.log('RESPONSE', response);
