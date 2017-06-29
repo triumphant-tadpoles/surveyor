@@ -73,6 +73,10 @@ app.get('/results', require('connect-ensure-login').ensureLoggedIn(),
       .then(user_id => {
         db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
           .then(result => {
+            //call indeed with prev query
+            //res.send results
+            //set up app.get '/'
+            
             res.send(result[0].marked_up_json);
           });
       })
