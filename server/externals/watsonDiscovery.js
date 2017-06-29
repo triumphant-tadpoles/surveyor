@@ -1,5 +1,9 @@
+const discoveryV1 = require('watson-developer-cloud').DiscoveryV1;
+const fs = require('fs');
+const path = require('path');
+let serverPath = path.join(__dirname, '../');
+
 module.exports = () => {
-  const discoveryV1 = require('watson-developer-cloud').DiscoveryV1;
   let key;
   let secret;
   if (process.env.DISCOVERY_KEY && process.env.DISCOVERY_SECRET) {
@@ -16,14 +20,12 @@ module.exports = () => {
     version_date: '2017-06-25'
   });
 
-  discovery.createEnvironment({
-    name: 'resume',
-    description: 'resume',
-    
-  }, function (err, response) {
-      if (err)
-        console.log('error:', err);
-      else
-        console.log(JSON.stringify(response, null, 2));
+  var file = fs.readFileSync(serverPath + '/temp/output.json');  
+  file += '';
+  file = JSON.parse(file);
+
+  discovery.addDocument({environment_id: 'a22e89d9-c38b-4d8f-b2ba-9f984bf4ee8f', collection_id: '3816d149-0432-46b2-a373-eda2e73ec8e4', file: file}, (error, data) => {
+      console.log('/////////', error);
+      console.log(JSON.stringify(data, null, 2));
   });
 }

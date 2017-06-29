@@ -39,6 +39,7 @@
     "react-facebook-login": "^3.6.2",
     "request-promise": "^4.2.1",
     "underscore": "^1.8.3",
+    "watson-developer-cloud": "^2.32.1",
     "webpack": "^2.2.1"
   }
 }
