@@ -29,7 +29,10 @@ class App extends React.Component {
 
     fetch('/', {
       method: 'POST',
-      body: tech
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({query: tech})
     })
     .then((response) => {
       return response.json();
@@ -42,6 +45,7 @@ class App extends React.Component {
         jobs: result.results,
         view: 'jobs'
       });
+      //
     })
     .catch((err) => {
       this.setState({

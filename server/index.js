@@ -1,24 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const indeed = require('./externals/indeed.js');
-const db = require('../database-postgresql/index.js');
+const dbTest = require('../database-postgresql/index.js');
 const multer = require('multer');
 
 const upload = multer();
 const pgp = require('pg-promise')();
-pgp.pg.defaults.ssl = true;
-const db = pgp(process.env.DATABASE_URL);
 const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy;
 
 
 const app = express();
+
+// pgp.pg.defaults.ssl = true;
+const db = pgp(process.env.DATABASE_URL);
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.set('port', (process.env.PORT || 5000));
 
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -51,7 +55,13 @@ function(accessToken, refreshToken, profile, cb) {
 
 
 app.post('/', (req, res, next) => {
-  indeed.indeed(req, res, next);
+  let userReq = {
+    body: req.body.query,
+    ip: req.headers['x-forwarded-for'],
+    userAgent: req.get('user-agent')
+  }
+  console.log(req.body, req.headers['x-forwarded-for'], req.get('user-agent'));
+  indeed.indeed(userReq, res, next);
 });
 
 app.get('/results', require('connect-ensure-login').ensureLoggedIn(),
@@ -63,6 +73,10 @@ app.get('/results', require('connect-ensure-login').ensureLoggedIn(),
       .then(user_id => {
         db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
           .then(result => {
+            //call indeed with prev query
+            //res.send results
+            //set up app.get '/'
+            
             res.send(result[0].marked_up_json);
           });
       })
