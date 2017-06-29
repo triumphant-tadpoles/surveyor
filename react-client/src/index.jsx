@@ -79,7 +79,19 @@ class App extends React.Component {
   }
 
   onLogin(loginData) {
-    console.log('woo! login data: ', loginData);
+    fetch('/gethistory', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id: loginData.id})
+    })
+    .then(response => {
+      return response.text();
+    })
+    .then(query => {
+      this.onSearch(query);
+    });
   }
 
   componentDidMount(props) {

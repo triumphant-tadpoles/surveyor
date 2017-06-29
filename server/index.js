@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.set('port', (process.env.PORT || 5000));
 
 const pgp = require('pg-promise')();
-pgp.pg.defaults.ssl = true;
+pgp.pg.defaults.ssl = false;
 const db = pgp(process.env.DATABASE_URL);
 
 app.use(bodyParser.urlencoded({
@@ -29,18 +29,14 @@ app.post('/', (req, res, next) => {
   indeed.indeed(userReq, res, next);
 });
 
-app.get('/results', (req, res) => {
-  db.query(`SELECT * FROM users WHERE facebook_id = '${req.user.id}'`)
+app.post('/gethistory', (req, res) => {
+  db.query(`SELECT * FROM users WHERE facebook_id = '${req.body.id}'`)
     .then(result => {
       return result[0].id;
     })
     .then(user_id => {
       db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
         .then(result => {
-          //call indeed with prev query
-          //res.send results
-          //set up app.get '/'
-          
           res.send(result[0].marked_up_json);
         });
     });
