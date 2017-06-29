@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import JobList from './components/JobList.jsx';
 import JobListItem from './components/JobListItem.jsx';
+import Login from './components/login.jsx';
 import Loading from './components/Loading.jsx';
 import Dropzone from 'react-dropzone';
 
@@ -18,6 +19,7 @@ class App extends React.Component {
       dropzoneActive: false
     };
     this.onSearch = this.onSearch.bind(this);
+    this.onLogin = this.onLogin.bind(this);
   }
 
   onSearch(tech) {
@@ -72,14 +74,16 @@ class App extends React.Component {
     console.log(files);
   }
 
-  componentDidMount(props) {
-    fetch('/testDB', {
+  onLogin() {
+    fetch('/auth/facebook', {
       method: 'GET'
-    }).then(response => {
-      return response.json();
-    }).then(rjson => {
-      console.log(rjson);
     })
+    .then(result => {
+      console.log(result);
+    })
+  }
+
+  componentDidMount(props) {
   }
 
   render () {
@@ -114,6 +118,9 @@ class App extends React.Component {
             ? <JobList jobList = {this.state.jobs}/>
             : null
           }
+        </div>
+        <div>
+          <Login onLogin={this.onLogin}/>
         </div>
       </Dropzone>
     )

@@ -3,7 +3,7 @@ const express = require('express');
 const fetch = require('isomorphic-fetch');
 const geoip2 = require('geoip2');
 const bodyParser = require('body-parser');
-const indeed = process.env.INDEED;
+const indeed = 8865882670516899;
 
 module.exports.indeed = (req, res, next) => {
   let chunk = '';
