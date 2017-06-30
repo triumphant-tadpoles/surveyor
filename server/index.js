@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const indeed = require('./externals/indeed.js');
+
 const dbTest = require('../database-postgresql/index.js');
 const multer = require('multer');
 const path = require('path');
@@ -13,7 +14,6 @@ pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
 const watsonDiscovery = require('./externals/watsonDiscovery.js');
-
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
