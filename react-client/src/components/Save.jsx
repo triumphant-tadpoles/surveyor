@@ -13,7 +13,7 @@ class Save extends React.Component {
           Save your search with Facebook Login
         </div>
         <FacebookLogin
-          appId='134148277165166'
+          appId='{process.env.FACEBOOKDEVID}'
           autoLoad={true}
           fields='name, email, picture'
           callback={this.props.saveQuery}
