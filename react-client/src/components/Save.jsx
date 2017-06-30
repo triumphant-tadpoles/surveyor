@@ -1,7 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 
-class Login extends React.Component {
+class Save extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -9,14 +9,18 @@ class Login extends React.Component {
   render() {
     return(
       <div>
+        <div>
+          Save your search with Facebook Login
+        </div>
         <FacebookLogin
-          appId={process.env.FACEBOOKDEVID}
+          appId='134148277165166'
+          autoLoad={true}
           fields='name, email, picture'
-          callback={this.props.onLogin}
+          callback={this.props.saveQuery}
         />
       </div>
     )
   }
 }
 
-export default Login;
+export default Save;

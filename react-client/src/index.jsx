@@ -4,7 +4,8 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import JobList from './components/JobList.jsx';
 import JobListItem from './components/JobListItem.jsx';
-import Login from './components/Login.jsx';
+import Save from './components/Save.jsx';
+import Load from './components/Load.jsx';
 import Loading from './components/Loading.jsx';
 import Dropzone from 'react-dropzone';
 
@@ -19,25 +20,34 @@ class App extends React.Component {
       dropzoneActive: false
     };
     this.onSearch = this.onSearch.bind(this);
-    this.onLogin = this.onLogin.bind(this);
+    this.saveQuery = this.saveQuery.bind(this);
+    this.onTechnologyChange = this.onTechnologyChange.bind(this);
+    this.onLoad = this.onLoad.bind(this);
   }
 
-  onSearch(tech) {
+  onTechnologyChange(query) {
+    this.setState({
+      technology: query
+    })
+  }
+
+  onSearch(query) {
     this.setState({
       view: 'loading'
-    })
+    });
 
     fetch('/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({query: tech})
+      body: JSON.stringify({query: query})
     })
     .then((response) => {
       return response.json();
     })
     .then(result => {
+      console.log('where is RESUT', result.results)
       if (result.error) {
         throw err;
       }
@@ -45,14 +55,13 @@ class App extends React.Component {
         jobs: result.results,
         view: 'jobs'
       });
-      //
     })
     .catch((err) => {
       this.setState({
         view: 'search'
       })
       console.log('ERROR');
-    })
+    });
   }
 
   onDragEnter() {
@@ -83,19 +92,36 @@ class App extends React.Component {
     });
   }
 
-  onLogin(loginData) {
-    fetch('/gethistory', {
+  saveQuery(loginData) {
+    fetch('/saveQuery', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({id: loginData.id})
+      body: JSON.stringify({
+        id: loginData.id,
+        query: this.state.technology
+      })
+    });
+  }
+
+  onLoad(loginData) {
+    fetch('/load', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: loginData.id
+      })
     })
     .then(response => {
-      return response.text();
+      return response.text()
     })
     .then(query => {
-      this.onSearch(query);
+      if (query) {
+        this.onSearch(query);
+      }
     });
   }
 
@@ -127,16 +153,16 @@ class App extends React.Component {
         { dropzoneActive && <div style={overlayStyle}>Drop files...</div> }
         <div>
           <div> <h1> Surveyor </h1></div>
-          <Search onSearch = {this.onSearch}/>
-          {this.state.view === 'loading'
-            ? <Loading/>
-            : this.state.view === 'jobs'
-            ? <JobList jobList = {this.state.jobs}/>
-            : null
-          }
+          <Search onSearch = {this.onSearch} technology={this.state.technology} onTechnologyChange={this.onTechnologyChange}/>
+            {this.state.view === 'loading'
+              ? <Loading/>
+              : this.state.view === 'jobs'
+              ? <JobList jobList={this.state.jobs} saveQuery={this.saveQuery}/>
+              : null
+            }
         </div>
-        <div>
-          <Login onLogin={this.onLogin}/>
+        <div hidden>
+          <Load onLoad={this.onLoad}/>
         </div>
       </Dropzone>
     )
