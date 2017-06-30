@@ -88,7 +88,23 @@ class App extends React.Component {
     fetch('/upload', {
       method: 'POST',
       body: formData
-    });
+    })
+    .then(response => {
+      console.log('RESPONSE', response);
+      return response.json();
+    })
+    .then(result => {
+      if (result.error) {
+        throw err;
+      }
+      this.setState({
+        jobs: result.results,
+        view: 'jobs'
+      });
+    })
+    .catch(err => {
+      console.log('ERROR:', err);
+    })
   }
 
   saveQuery(loginData) {
