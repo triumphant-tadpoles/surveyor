@@ -1,7 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 
-class Login extends React.Component {
+class Load extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -9,14 +9,18 @@ class Login extends React.Component {
   render() {
     return(
       <div>
+        <div>
+          This is load, not login
+        </div>
         <FacebookLogin
-          appId={process.env.FACEBOOKDEVID}
+          appId='{process.env.FACEBOOKDEVID}'
+          autoLoad={true}
           fields='name, email, picture'
-          callback={this.props.onLogin}
+          callback={this.props.onLoad}
         />
       </div>
     )
   }
 }
 
-export default Login;
+export default Load;

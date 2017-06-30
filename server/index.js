@@ -36,8 +36,6 @@ app.use(multer({storage: storage}).any());
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.set('port', (process.env.PORT || 5000));
 
-pgp.pg.defaults.ssl = true;
-
 
 app.post('/', (req, res, next) => {
   let userReq = {
@@ -48,20 +46,52 @@ app.post('/', (req, res, next) => {
   indeed.indeed(userReq, res, next);
 });
 
+
 app.post('/upload', (req, res, next)=>{
   docConverter.convertDoc(req, res);
   res.send('');
 });
 
-app.post('/gethistory', (req, res) => {
+
+app.post('/load', (req, res) => {
   db.query(`SELECT * FROM users WHERE facebook_id = '${req.body.id}'`)
     .then(result => {
+      if (result.length === 0) {
+        throw doNotAutoLoad
+      }
       return result[0].id;
     })
     .then(user_id => {
       db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
         .then(result => {
+          console.log('SHOULD BE CONST', result[0].marked_up_json)
           res.send(result[0].marked_up_json);
+        });
+    }) 
+    .catch(doNotAutoLoad => {
+      res.send();
+    })
+});
+
+app.post('/saveQuery', (req, res) => {
+  db.query(`SELECT * FROM users WHERE facebook_id = '${req.body.id}'`)
+    .then(result => {
+      if (result.length === 0) {
+        db.query(`INSERT INTO "public"."users"("facebook_id") VALUES('${req.body.id}') RETURNING "id", "username", "facebook_id";`);
+        throw notInDb;
+      }
+      return result[0].id;
+    })
+    .then(user_id => {
+      console.log('I GOT UPDATED')
+      db.query(`UPDATE "public"."resumes" SET "marked_up_json"='${req.body.query}' WHERE "user_id"=${user_id} RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
+      res.send()        
+    })
+    .catch(notInDb => {
+      db.query(`SELECT id FROM users where facebook_id = '${req.body.id}'`)
+        .then(user_id => {
+          db.query(`INSERT INTO "public"."resumes"("user_id", "marked_up_json") VALUES(${user_id[0].id}, '${req.body.query}') RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
+          res.send();
         });
     });
 });
