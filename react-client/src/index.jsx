@@ -47,7 +47,6 @@ class App extends React.Component {
       return response.json();
     })
     .then(result => {
-      console.log('where is RESUT', result.results)
       if (result.error) {
         throw err;
       }
