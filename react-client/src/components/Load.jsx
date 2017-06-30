@@ -13,7 +13,7 @@ class Load extends React.Component {
           This is load, not login
         </div>
         <FacebookLogin
-          appId='{process.env.FACEBOOKDEVID}'
+          appId='134148277165166'
           autoLoad={true}
           fields='name, email, picture'
           callback={this.props.onLoad}

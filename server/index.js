@@ -10,7 +10,7 @@ const crypto = require('crypto');
 const mime = require('mime');
 
 const pgp = require('pg-promise')();
-pgp.pg.defaults.ssl = true;
+pgp.pg.defaults.ssl = false;
 const db = pgp(process.env.DATABASE_URL);
 
 const docConverter = require('./externals/docconverter.js');
@@ -64,7 +64,6 @@ app.post('/load', (req, res) => {
     .then(user_id => {
       db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
         .then(result => {
-          console.log('SHOULD BE CONST', result[0].marked_up_json)
           res.send(result[0].marked_up_json);
         });
     }) 
@@ -83,7 +82,6 @@ app.post('/saveQuery', (req, res) => {
       return result[0].id;
     })
     .then(user_id => {
-      console.log('I GOT UPDATED')
       db.query(`UPDATE "public"."resumes" SET "marked_up_json"='${req.body.query}' WHERE "user_id"=${user_id} RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
       res.send()        
     })
