@@ -13,6 +13,7 @@ const pgp = require('pg-promise')();
 pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
+const docConverter = require('./externals/docconverter.js');
 const watsonDiscovery = require('./externals/watsonDiscovery.js');
 
 const app = express();
@@ -48,7 +49,7 @@ app.post('/', (req, res, next) => {
 });
 
 app.post('/upload', (req, res, next)=>{
-  console.log(req.files);
+  docConverter.convertDoc(req, res);
   res.send('');
 });
 
