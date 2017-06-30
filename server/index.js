@@ -76,19 +76,19 @@ app.post('/saveQuery', (req, res) => {
   db.query(`SELECT * FROM users WHERE facebook_id = '${req.body.id}'`)
     .then(result => {
       if (result.length === 0) {
-        db.query(`INSERT INTO "public"."users"("facebook_id") VALUES('${req.body.id}') RETURNING "id", "username", "facebook_id";`);
+        db.query(`INSERT INTO "users"("facebook_id") VALUES('${req.body.id}') RETURNING "id", "username", "facebook_id";`);
         throw notInDb;
       }
       return result[0].id;
     })
     .then(user_id => {
-      db.query(`UPDATE "public"."resumes" SET "marked_up_json"='${req.body.query}' WHERE "user_id"=${user_id} RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
+      db.query(`UPDATE "resumes" SET "marked_up_json"='${req.body.query}' WHERE "user_id"=${user_id} RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
       res.send()        
     })
     .catch(notInDb => {
       db.query(`SELECT id FROM users where facebook_id = '${req.body.id}'`)
         .then(user_id => {
-          db.query(`INSERT INTO "public"."resumes"("user_id", "marked_up_json") VALUES(${user_id[0].id}, '${req.body.query}') RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
+          db.query(`INSERT INTO "resumes"("user_id", "marked_up_json") VALUES(${user_id[0].id}, '${req.body.query}') RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
           res.send();
         });
     });
