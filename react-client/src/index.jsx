@@ -70,12 +70,17 @@ class App extends React.Component {
   }
 
   onDrop(files) {
-    console.log(files);
+    console.log(files[0]);
+    let formData = new FormData();
     this.setState({
       files,
       dropzoneActive: false
     });
-    console.log(files);
+    formData.append('file', files[0]);
+    fetch('/upload', {
+      method: 'POST',
+      body: formData
+    });
   }
 
   onLogin(loginData) {
