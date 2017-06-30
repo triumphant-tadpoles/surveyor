@@ -2,7 +2,7 @@ const fetch = require('isomorphic-fetch');
 var DocumentConversionV1 = require('watson-developer-cloud/document-conversion/v1');
 const FormData = require('form-data');
 const fs = require('file-system');
-
+const discovery = require('./watsonDiscovery.js');
 let convertDoc = (req, res) => {
 
 	var document_conversion = new DocumentConversionV1({
@@ -18,7 +18,7 @@ let convertDoc = (req, res) => {
 	document_conversion.convert({
 	  // (JSON) ANSWER_UNITS, NORMALIZED_HTML, or NORMALIZED_TEXT 
 	  //file: fs.createReadStream('/Users/Ananth/dev/precourse/projects/surveyor/server/externals/temp.docx'),
-	  file: fs.createReadStream('/Users/Ananth/dev/precourse/projects/surveyor/server./uploads/fe7f006cd2dcf5ad47fa3c6a66653708'),
+	  file: fs.createReadStream(req.files[0].path),
 	  conversion_target: document_conversion.conversion_target.ANSWER_UNITS,
 
 	}, function (err, response) {
@@ -26,6 +26,7 @@ let convertDoc = (req, res) => {
 	    console.error(err);
 	  } else {
 	  	console.log('RESPOSE from watson..', response);
+			discovery(response);
 	    console.log(JSON.stringify(response, null, 2));
 	  }
 });
