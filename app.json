@@ -9,6 +9,9 @@
     },
     "INDEED": {
       "required": true
+    },
+    "FACEBOOKDEVID": {
+      "required": true
     }
   },
   "formation": {

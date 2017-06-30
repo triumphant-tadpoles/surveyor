@@ -1,5 +1,6 @@
 var config = {
-  postgresUrl: `GET URL FROM THIS PROJECT'S ACCOUNT`
+  indeed: 'BLANK',
+  fbId: 'BLANK'
 };
 
 module.exports = config;

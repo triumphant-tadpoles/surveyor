@@ -984,9 +984,15 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.7, debug@^2.1.1, debug@^2.2.0:
+debug@2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.7.tgz#92bad1f6d05bbb6bba22cca88bcd0ec894c2861e"
+  dependencies:
+    ms "2.0.0"
+
+debug@^2.1.1, debug@^2.2.0:
+  version "2.6.8"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
     ms "2.0.0"
 
@@ -1611,8 +1617,8 @@ jquery@^3.1.1:
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
 js-tokens@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
 jsbn@~0.1.0:
   version "0.1.1"
@@ -2055,8 +2061,8 @@ pg-pool@1.*:
     object-assign "4.1.0"
 
 pg-promise@^6.1.1:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-6.1.2.tgz#9965b3b4119cee7928bc3f5d7397f6a759e4db3e"
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-6.2.1.tgz#a7e81a625a2d243831342fffbd3b099de52509f7"
   dependencies:
     manakin "0.4"
     pg "^6.4.0"
@@ -2249,6 +2255,10 @@ react-dropzone@^3.13.3:
     attr-accept "^1.0.3"
     prop-types "^15.5.7"
 
+react-facebook-login@^3.6.2:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-3.6.2.tgz#1965f6af54cc90341b788d0752185cfd25a14d30"
+
 react@^15.4.2:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
@@ -2274,16 +2284,26 @@ read-pkg@^1.0.0:
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
 
-readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.6:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.2.tgz#5a04df05e4f57fe3f0dc68fdd11dc5c97c7e6f4d"
+readable-stream@1.1.x:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "0.0.1"
+    string_decoder "~0.10.x"
+
+readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.2, readable-stream@^2.2.6:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
+
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.3"
     isarray "~1.0.0"
     process-nextick-args "~1.0.6"
-    safe-buffer "~5.1.0"
-    string_decoder "~1.0.0"
+    safe-buffer "~5.1.1"
+    string_decoder "~1.0.3"
     util-deprecate "~1.0.1"
 
 readdirp@^2.0.0:
@@ -2423,7 +2443,7 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^2.0.0"
     inherits "^2.0.1"
 
-safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@~5.1.0:
+safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
@@ -2587,7 +2607,7 @@ string_decoder@^0.10.25:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
-string_decoder@~1.0.0:
+string_decoder@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
   dependencies:

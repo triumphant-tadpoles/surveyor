@@ -5,25 +5,23 @@ const geoip2 = require('geoip2');
 const bodyParser = require('body-parser');
 const indeed = process.env.INDEED;
 
-module.exports.indeed = (req, res, next) => {
-  let chunk = '';
+module.exports.indeed = (details, res, next) => {
   let city = 'san francisco';
   let state = 'CA';
-  console.log(req.headers['x-forwarded-for']);
-  req.on('data', data => {
-    chunk += data;
-  });
-  req.on('end', () => {
-    ipLookup(req.headers['x-forwarded-for']).then((result) => {
-     indeedFetch(req, res, next, result.city, result.subdivision, chunk); 
+  details.city = 'san francisco';
+  details.state = 'CA';
+    ipLookup(details.ip).then((result) => {
+      console.log(result);
+      details.city = result.city;
+      details.state = result.subdivision;
+     indeedFetch(details, res, next); 
     }).catch(error => {
-      indeedFetch(req, res, next, city, state, chunk);
+      indeedFetch(details, res, next);
     });
-  });
 }
 
-let indeedFetch = (req, res, next, city, state, query) => {
-  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${query}&l=${city}%2C+${state}&userAgent=${req.get('user-agent')}&limit=100&fromage=10&radius=100`, {
+let indeedFetch = (data, res, next) => {
+  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${data.body}&l=${data.city}%2C+${data.state}&userAgent=${data.userAgent}&limit=100&fromage=10&radius=100`, {
     method: 'GET'
   }).then((response, error) =>{
     if (error) throw error;

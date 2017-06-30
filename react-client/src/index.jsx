@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import JobList from './components/JobList.jsx';
 import JobListItem from './components/JobListItem.jsx';
+import Login from './components/Login.jsx';
 import Loading from './components/Loading.jsx';
 import Dropzone from 'react-dropzone';
 
@@ -18,6 +19,7 @@ class App extends React.Component {
       dropzoneActive: false
     };
     this.onSearch = this.onSearch.bind(this);
+    this.onLogin = this.onLogin.bind(this);
   }
 
   onSearch(tech) {
@@ -27,7 +29,10 @@ class App extends React.Component {
 
     fetch('/', {
       method: 'POST',
-      body: tech
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({query: tech})
     })
     .then((response) => {
       return response.json();
@@ -40,6 +45,7 @@ class App extends React.Component {
         jobs: result.results,
         view: 'jobs'
       });
+      //
     })
     .catch((err) => {
       this.setState({
@@ -64,22 +70,36 @@ class App extends React.Component {
   }
 
   onDrop(files) {
-    console.log(files);
+    console.log(files[0]);
+    let formData = new FormData();
     this.setState({
       files,
       dropzoneActive: false
     });
-    console.log(files);
+    formData.append('file', files[0]);
+    fetch('/upload', {
+      method: 'POST',
+      body: formData
+    });
+  }
+
+  onLogin(loginData) {
+    fetch('/gethistory', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id: loginData.id})
+    })
+    .then(response => {
+      return response.text();
+    })
+    .then(query => {
+      this.onSearch(query);
+    });
   }
 
   componentDidMount(props) {
-    fetch('/testDB', {
-      method: 'GET'
-    }).then(response => {
-      return response.json();
-    }).then(rjson => {
-      console.log(rjson);
-    })
   }
 
   render () {
@@ -114,6 +134,9 @@ class App extends React.Component {
             ? <JobList jobList = {this.state.jobs}/>
             : null
           }
+        </div>
+        <div>
+          <Login onLogin={this.onLogin}/>
         </div>
       </Dropzone>
     )
