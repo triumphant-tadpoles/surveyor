@@ -10,7 +10,7 @@ class Login extends React.Component {
     return(
       <div>
         <FacebookLogin
-          appId={`${process.env.FACEBOOKDEVID}`}
+          appId='134148277165166'
           fields='name, email, picture'
           callback={this.props.onLogin}
         />
