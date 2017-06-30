@@ -2,6 +2,7 @@ const fetch = require('isomorphic-fetch');
 var DocumentConversionV1 = require('watson-developer-cloud/document-conversion/v1');
 const FormData = require('form-data');
 const fs = require('file-system');
+const discovery = require('./watsonDiscovery.js');
 
 let convertDoc = (req, res) => {
 
@@ -24,7 +25,8 @@ let convertDoc = (req, res) => {
 	  if (err) {
 	    console.error(err);
 	  } else {
-	  	console.log('RESPOSE from watson..', response);
+	    console.log('RESPOSE from watson..', response);
+	    discovery(response);
 	    console.log(JSON.stringify(response, null, 2));
 	  }
 });
