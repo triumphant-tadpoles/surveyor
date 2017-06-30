@@ -1,5 +1,5 @@
 
-module.exports = () => {
+module.exports = (doc) => {
 const discoveryV1 = require('watson-developer-cloud').DiscoveryV1;
 const fs = require('fs');
 const path = require('path');
@@ -19,8 +19,7 @@ let serverPath = path.join(__dirname, '../');
     version_date: '2017-06-25'
   });
 
-  var file = fs.readFileSync((serverPath + '/temp/output.json'));
-  let doc = JSON.parse(file);  
+
   discovery.addDocument({environment_id: 'a22e89d9-c38b-4d8f-b2ba-9f984bf4ee8f', collection_id: '3816d149-0432-46b2-a373-eda2e73ec8e4', 'file': doc}, (error, data) => {
       console.log('/////////', error);
       console.log(JSON.stringify(data, null, 2));
