@@ -2,7 +2,7 @@ const fetch = require('isomorphic-fetch');
 var DocumentConversionV1 = require('watson-developer-cloud/document-conversion/v1');
 const FormData = require('form-data');
 const fs = require('file-system');
-const discovery = require('./watsonDiscovery.js');
+const discovery = require('./naturalLanguageUnderstanding.js');
 
 let convertDoc = (req, res) => {
 
@@ -13,7 +13,7 @@ let convertDoc = (req, res) => {
 	});
 
 	let form = new FormData();
-	console.log('form===', form);
+	// console.log('form===', form);
 	form.append('config[conversion_target]', 'answer_units');
 
 	document_conversion.convert({
@@ -25,9 +25,9 @@ let convertDoc = (req, res) => {
 	  if (err) {
 	    console.error(err);
 	  } else {
-	    console.log('RESPOSE from watson..', response);
+	    // console.log('RESPOSE from watson..', response);
 	    discovery(response);
-	    console.log(JSON.stringify(response, null, 2));
+	    // console.log(JSON.stringify(response, null, 2));
 	  }
 });
 
