@@ -1,4 +1,5 @@
 const discoveryV1 = require('watson-developer-cloud').DiscoveryV1;
+const indeed = require('./indeed.js');
 const fs = require('fs');
 const path = require('path');
 let serverPath = path.join(__dirname, '../');
@@ -9,7 +10,7 @@ let natural_language_understanding = new NaturalLanguageUnderstandingV1({
   'version_date': '2017-02-27'
 });
 
-module.exports = (doc) => {
+module.exports.analyze = (doc, req, res) => {
   doc.answer_units[0].content[0].text
   var parameters = {
     'text': doc.answer_units[0].content[0].text,
@@ -26,10 +27,22 @@ module.exports = (doc) => {
       }
     }
   }
-  natural_language_understanding.analyze(parameters, function(err, response) {
+  natural_language_understanding.analyze(parameters, function(err, result) {
     if (err)
       console.log('error:', err);
-    else
-      console.log(JSON.stringify(response, null, 2));
+    else {
+      //console.log('Response from ANALYZER...');
+      let keywords = result.keywords.map((keyword) => {
+        return keyword.text;
+      });
+      //indeed
+      let userReq = {
+        body: keywords.join(','),
+        ip: req.headers['x-forwarded-for'],
+        userAgent: req.get('user-agent')
+      }
+      //console.log('calling indeed.. userReq=', userReq);
+      indeed.indeed(userReq, res, null);
+    }
   });
 }

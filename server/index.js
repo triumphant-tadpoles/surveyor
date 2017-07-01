@@ -47,8 +47,8 @@ app.post('/', (req, res, next) => {
 
 
 app.post('/upload', (req, res, next)=>{
+  // console.log('inside upload..');
   docConverter.convertDoc(req, res);
-  res.send('');
 });
 
 
