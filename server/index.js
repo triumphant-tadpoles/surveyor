@@ -14,7 +14,6 @@ pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
 const docConverter = require('./externals/docconverter.js');
-const watsonDiscovery = require('./externals/watsonDiscovery.js');
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -92,10 +91,6 @@ app.post('/saveQuery', (req, res) => {
           res.send();
         });
     });
-});
-
-app.get('/test', (req, res, next) => {
-  watsonDiscovery();
 });
 
 app.listen(app.get('port'), function() {
