@@ -1,4 +1,19 @@
+#header {
+  text-align: center;
+  background-color: #33E9FF;
+  padding: 0.3em;
+  font-weight: bold;
+}
 
+#dropzone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25em;
+  margin-left: -35em;
+  padding: 25em;
+  border-style: dashed;
+}
 
 /* CSS LOADER */
 .cssload-loader {
