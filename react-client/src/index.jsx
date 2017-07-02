@@ -111,6 +111,8 @@ class App extends React.Component {
   }
 
   saveQuery(loginData) {
+    console.log('loginData', loginData)
+    console.log('saving to db...')
     fetch('/saveQuery', {
       method: 'POST',
       headers: {
@@ -119,8 +121,14 @@ class App extends React.Component {
       body: JSON.stringify({
         id: loginData.id,
         query: this.state.technology
-      })
-    });
+      }),
+    })
+    .then(response => {
+      return response.text();
+    })
+    .then(text => {
+      console.log('success saving to db! : ', text);
+    })
   }
 
   onLoad(loginData) {
