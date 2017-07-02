@@ -35,7 +35,9 @@ module.exports.analyze = (doc, req, res) => {
       let keywords = result.keywords.map((keyword) => {
         return keyword.text;
       });
-      //indeed
+      //David: 
+      //save keywords array to db here.
+
       let userReq = {
         body: keywords.join(','),
         ip: req.headers['x-forwarded-for'],
