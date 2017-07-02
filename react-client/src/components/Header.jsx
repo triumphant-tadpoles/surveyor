@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        {this.props.jobs.length !== 0 ? <p>Drop resume to search</p> : <span></span>}        
+        {this.props.jobs.length !== 0 ? <p id="header">Drag and drop resume to search</p> : <span></span>}        
       </div>
     );
   }

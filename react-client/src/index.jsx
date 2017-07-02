@@ -8,7 +8,8 @@ import Save from './components/Save.jsx';
 import Load from './components/Load.jsx';
 import Loading from './components/Loading.jsx';
 import Dropzone from 'react-dropzone';
-import Header from './components/Header.jsx'
+import Header from './components/Header.jsx';
+import Start from './components/Start.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -80,6 +81,9 @@ class App extends React.Component {
 
   onDrop(files) {
     console.log(files[0]);
+    this.setState({
+      view: 'loading'
+    });
     let formData = new FormData();
     this.setState({
       files,
@@ -170,8 +174,9 @@ class App extends React.Component {
         <div>
           <Header jobs={this.state.jobs}/>
           <div> <h1> Surveyor </h1></div>
-          <Search onSearch = {this.onSearch} technology={this.state.technology} onTechnologyChange={this.onTechnologyChange}/>
-            {this.state.view === 'loading'
+            {this.state.view === 'search'
+              ? <Start/>
+              : this.state.view === 'loading'
               ? <Loading/>
               : this.state.view === 'jobs'
               ? <JobList jobList={this.state.jobs} saveQuery={this.saveQuery}/>
