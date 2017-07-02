@@ -8,6 +8,7 @@ import Save from './components/Save.jsx';
 import Load from './components/Load.jsx';
 import Loading from './components/Loading.jsx';
 import Dropzone from 'react-dropzone';
+import Header from './components/Header.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -167,6 +168,7 @@ class App extends React.Component {
       >
         { dropzoneActive && <div style={overlayStyle}>Drop files...</div> }
         <div>
+          <Header jobs={this.state.jobs}/>
           <div> <h1> Surveyor </h1></div>
           <Search onSearch = {this.onSearch} technology={this.state.technology} onTechnologyChange={this.onTechnologyChange}/>
             {this.state.view === 'loading'
