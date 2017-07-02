@@ -75,7 +75,6 @@ app.post('/load', (req, res) => {
 });
 
 app.post('/saveQuery', (req, res) => {
-  console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
   db.query(`SELECT * FROM users WHERE facebook_id = '${req.body.id}'`)
     .then(result => {
       if (result.length === 0) {
@@ -86,13 +85,13 @@ app.post('/saveQuery', (req, res) => {
     })
     .then(user_id => {
       db.query(`UPDATE "public"."resumes" SET "marked_up_json"='${req.body.query}' WHERE "user_id"=${user_id} RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
-      res.send('user was already in DB, but query has been updated!')        
+      res.send()        
     })
     .catch(notInDb => {
       db.query(`SELECT id FROM users where facebook_id = '${req.body.id}'`)
         .then(user_id => {
           db.query(`INSERT INTO "public"."resumes"("user_id", "marked_up_json") VALUES(${user_id[0].id}, '${req.body.query}') RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
-          res.send('user was not in DB, username and query has been updated!');
+          res.send();
         });
     });
 });
