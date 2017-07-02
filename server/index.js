@@ -79,7 +79,7 @@ app.post('/saveQuery', (req, res) => {
   db.query(`SELECT * FROM users WHERE facebook_id = '${req.body.id}'`)
     .then(result => {
       if (result.length === 0) {
-        db.query(`INSERT INTO "public"."users"("facebook_id") VALUES('${req.body.id}') RETURNING "id", "username", "facebook_id";`);
+        db.query(`INSERT INTO "public"."users"("facebook_id") VALUES('${req.body.id}') RETURNING "id", "facebook_id";`);
         throw notInDb;
       }
       return result[0].id;
