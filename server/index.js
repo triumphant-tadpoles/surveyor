@@ -9,7 +9,7 @@ const crypto = require('crypto');
 const mime = require('mime');
 
 const pgp = require('pg-promise')();
-pgp.pg.defaults.ssl = true;
+pgp.pg.defaults.ssl = false;
 const db = pgp(process.env.DATABASE_URL);
 
 const docConverter = require('./externals/docconverter.js');
