@@ -24,10 +24,9 @@ let convertDoc = (doc, callback) => {
 
 	}, function (err, response) {
 	  if (err) {
-	    console.error(err);
+			callback(err, null);
 	  } else {
-	    console.log('RESPOSE from watson..', response);
-	    callback(response);
+	    callback(null, response);
 	  }
 });
 

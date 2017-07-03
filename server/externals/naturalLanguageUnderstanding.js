@@ -31,8 +31,10 @@ module.exports.analyze = (doc, callback) => {
     'language': 'en'
   }
   natural_language_understanding.analyze(parameters, function(err, result) {
-    if (err)
-      console.log('error:', err);
+    if (err) {
+      //console.log('error:', err);
+      callback(err, null);
+    }
     else {
       //console.log('Response from ANALYZER...');
       let keywords = result.keywords.map((keyword) => {
@@ -40,7 +42,7 @@ module.exports.analyze = (doc, callback) => {
       });
       
       //console.log('calling indeed.. userReq=', userReq);
-      callback(keywords);
+      callback(null, keywords);
     }
   });
 }
