@@ -18,8 +18,6 @@ module.exports.indeed = (details, res, next) => {
       details.state = result.subdivision;
      indeedFetch(details, res, next); 
     }).catch(error => { 
-      // console.log('iplookup ERROR:', error);
-      // console.log('details=', details);
       indeedFetch(details, res, next);
     });
 }
@@ -31,11 +29,9 @@ let indeedFetch = (data, res, next) => {
     if (error) throw error;
     else return response.json();
   }).then((rjson, error) => {
-    // console.log('result from indeed....', rjson);
     if (error) throw error;
     else res.send(rjson);
   }).catch(error => {
-    // console.log('ERROR from indeed fetch:', error);
     res.send(error);
   });
 }

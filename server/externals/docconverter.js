@@ -3,8 +3,8 @@ var DocumentConversionV1 = require('watson-developer-cloud/document-conversion/v
 const FormData = require('form-data');
 const fs = require('file-system');
 const docAnalyzer = require('./naturalLanguageUnderstanding.js');
-const converterUser = process.env.WATSONCONVERTERUSER; //18c7c47c-faf3-44c9-abd1-7f8a67d19019
-const converterPass = process.env.WATSONCONVERTERPASS; //5mgcy7uIQc5B
+const converterUser = process.env.WATSONCONVERTERUSER;
+const converterPass = process.env.WATSONCONVERTERPASS;
 
 let convertDoc = (doc, callback) => {
 
@@ -28,10 +28,8 @@ let convertDoc = (doc, callback) => {
 	  } else {
 	    callback(null, response);
 	  }
-});
-
+	});
 };
-
 module.exports = {
 	convertDoc: convertDoc
 }
