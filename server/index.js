@@ -9,7 +9,7 @@ const crypto = require('crypto');
 const mime = require('mime');
 
 const pgp = require('pg-promise')();
-pgp.pg.defaults.ssl = true;
+pgp.pg.defaults.ssl = false;
 const db = pgp(process.env.DATABASE_URL);
 
 const docConverter = require('./externals/docconverter.js');
@@ -64,9 +64,9 @@ app.post('/load', (req, res) => {
       return result[0].id;
     })
     .then(user_id => {
-      db.query(`SELECT marked_up_json FROM resumes WHERE user_id = '${user_id}'`)
+      db.query(`SELECT keywords FROM resumes WHERE user_id = '${user_id}'`)
         .then(result => {
-          res.send(result[0].marked_up_json);
+          res.send(result[0].keywords);
         });
     }) 
     .catch(doNotAutoLoad => {
@@ -84,13 +84,13 @@ app.post('/saveQuery', (req, res) => {
       return result[0].id;
     })
     .then(user_id => {
-      db.query(`UPDATE "public"."resumes" SET "marked_up_json"='${req.body.query}' WHERE "user_id"=${user_id} RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
+      db.query(`UPDATE "public"."resumes" SET "keywords"='${req.body.query}' WHERE "user_id"=${user_id} RETURNING "id", "user_id", "keywords";`);
       res.send()        
     })
     .catch(notInDb => {
       db.query(`SELECT id FROM users where facebook_id = '${req.body.id}'`)
         .then(user_id => {
-          db.query(`INSERT INTO "public"."resumes"("user_id", "marked_up_json") VALUES(${user_id[0].id}, '${req.body.query}') RETURNING "id", "user_id", "aws_url", "marked_up_json";`);
+          db.query(`INSERT INTO "public"."resumes"("user_id", "keywords") VALUES(${user_id[0].id}, '${req.body.query}') RETURNING "id", "user_id", "keywords";`);
           res.send();
         });
     });
