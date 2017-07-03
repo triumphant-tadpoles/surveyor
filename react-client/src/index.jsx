@@ -19,7 +19,8 @@ class App extends React.Component {
       technology: '',
       view: 'search',
       files: [],
-      dropzoneActive: false
+      dropzoneActive: false,
+      loadingPrevious: false
     };
     this.onSearch = this.onSearch.bind(this);
     this.saveQuery = this.saveQuery.bind(this);
@@ -38,31 +39,36 @@ class App extends React.Component {
       view: 'loading'
     });
 
-    fetch('/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({query: query})
-    })
-    .then((response) => {
-      return response.json();
-    })
-    .then(result => {
-      if (result.error) {
-        throw err;
-      }
-      this.setState({
-        jobs: result.results,
-        view: 'jobs'
-      });
-    })
-    .catch((err) => {
-      this.setState({
-        view: 'search'
+    var that = this;
+    setTimeout(function() {
+      fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({query: query})
       })
-      console.log('ERROR');
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .then(result => {
+        if (result.error) {
+          throw err;
+        }
+        that.setState({
+          jobs: result.results,
+          view: 'jobs',
+          loadingPrevious: false
+        });
+      })
+      .catch((err) => {
+        that.setState({
+          view: 'search',
+          loadingPrevious: false
+        })
+        console.log('ERROR');
+      });
+    }, 3000)
   }
 
   onDragEnter() {
@@ -138,6 +144,9 @@ class App extends React.Component {
     })
     .then(query => {
       if (query) {
+        this.setState({
+          loadingPrevious: true
+        })
         this.onSearch(query);
       }
     });
@@ -175,7 +184,7 @@ class App extends React.Component {
             {this.state.view === 'search'
               ? <Start/>
               : this.state.view === 'loading'
-              ? <Loading/>
+              ? <Loading loadingPrevious={this.state.loadingPrevious}/>
               : this.state.view === 'jobs'
               ? <JobList jobList={this.state.jobs} saveQuery={this.saveQuery}/>
               : null
