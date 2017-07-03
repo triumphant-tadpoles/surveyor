@@ -171,7 +171,7 @@ class App extends React.Component {
         { dropzoneActive && <div style={overlayStyle}>Drop files...</div> }
         <div>
           <Header jobs={this.state.jobs}/>
-          <div> <h1> Surveyor </h1></div>
+          <div> <h1 id="title"> Surveyor </h1></div>
             {this.state.view === 'search'
               ? <Start/>
               : this.state.view === 'loading'

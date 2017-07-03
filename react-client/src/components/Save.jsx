@@ -8,7 +8,7 @@ class Save extends React.Component {
 
   render() {
     return(
-      <div align='right'>
+      <div id="login">
         <FacebookLogin
           appId='134148277165166'
           autoLoad={true}
