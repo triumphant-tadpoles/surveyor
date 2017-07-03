@@ -68,7 +68,7 @@ class App extends React.Component {
         })
         console.log('ERROR');
       });
-    }, 3000)
+    }, 4000)
   }
 
   onDragEnter() {
@@ -163,8 +163,8 @@ class App extends React.Component {
       right: 0,
       bottom: 0,
       left: 0,
-      padding: '2.5em 0',
-      background: 'rgba(0,0,0,0.5)',
+      padding: '12em 0',
+      background: 'rgba(0,0,0,0.7)',
       textAlign: 'center',
       color: '#fff'
     };
@@ -177,10 +177,10 @@ class App extends React.Component {
         onDragEnter={this.onDragEnter.bind(this)}
         onDragLeave={this.onDragLeave.bind(this)}
       >
-        { dropzoneActive && <div style={overlayStyle}>Drop files...</div> }
+        { dropzoneActive && <div style={overlayStyle}>Release to Search</div> }
         <div>
           <Header jobs={this.state.jobs}/>
-          <div> <h1 id="title"> Surveyor </h1></div>
+          <div> <h1 id="title"> Surveyor  &#x1F50D; </h1></div>
             {this.state.view === 'search'
               ? <Start/>
               : this.state.view === 'loading'

@@ -9,7 +9,7 @@ class JobList extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="job-list">
 				<div>
 					<Save saveQuery={this.props.saveQuery}/>
 				</div>

@@ -7,15 +7,16 @@ class Loading extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="loading-box">
+        <div className="cssload-loader">
+          <span></span>
+        </div>
         { 
-          this.props.loadingPrevious ? <div>You have previously saved your last search, please wait while we reload your results...</div> : <div></div>
+          this.props.loadingPrevious ? 
+            <div className="loading-text">Remembering your last resume</div> 
+            : <div className="loading-text">Analyzing your resume</div>
         }
-      <div className="cssload-loader">
-        <div className="cssload-inner cssload-one"></div>
-        <div className="cssload-inner cssload-two"></div>
-        <div className="cssload-inner cssload-three"></div>
-      </div>
+        <p></p>
       </div>
     )
   }
