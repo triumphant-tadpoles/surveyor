@@ -157,17 +157,6 @@ class App extends React.Component {
 
   render () {
     const { accept, files, dropzoneActive } = this.state;
-    const overlayStyle = {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-      padding: '12em 0',
-      background: 'rgba(0,0,0,0.7)',
-      textAlign: 'center',
-      color: '#fff'
-    };
     return (
       <Dropzone
         disableClick
@@ -177,7 +166,7 @@ class App extends React.Component {
         onDragEnter={this.onDragEnter.bind(this)}
         onDragLeave={this.onDragLeave.bind(this)}
       >
-        { dropzoneActive && <div style={overlayStyle}>Release to Search</div> }
+        { dropzoneActive && <div className="overlay">Release to Search</div> }
         <div>
           <Header jobs={this.state.jobs}/>
           <div> <h1 id="title"> Surveyor  &#x1F50D; </h1></div>
