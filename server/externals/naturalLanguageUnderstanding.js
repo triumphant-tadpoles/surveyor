@@ -27,7 +27,8 @@ module.exports.analyze = (doc, callback) => {
         'sentiment': true,
         'limit': 2
       }
-    }
+    },
+    'language': 'en'
   }
   natural_language_understanding.analyze(parameters, function(err, result) {
     if (err)
