@@ -20,7 +20,8 @@ class App extends React.Component {
       view: 'search',
       files: [],
       dropzoneActive: false,
-      loadingPrevious: false
+      loadingPrevious: false,
+      errMsg: ''
     };
     this.onSearch = this.onSearch.bind(this);
     this.saveQuery = this.saveQuery.bind(this);
@@ -61,32 +62,29 @@ class App extends React.Component {
           loadingPrevious: false
         });
       })
-      .catch((err) => {
+      .catch(err => {
         that.setState({
           view: 'search',
-          loadingPrevious: false
+          loadingPrevious: false,
+          errMsg: err + ''
         })
-        console.log('ERROR');
       });
     }, 4000)
   }
 
   onDragEnter() {
-    console.log('enter')
     this.setState({
       dropzoneActive: true
     });
   }
 
   onDragLeave() {
-    console.log('leave')
     this.setState({
       dropzoneActive: false
     });
   }
 
   onDrop(files) {
-    console.log(files[0]);
     this.setState({
       view: 'loading'
     });
@@ -101,7 +99,6 @@ class App extends React.Component {
       body: formData
     })
     .then(response => {
-      console.log('RESPONSE', response);
       return response.json();
     })
     .then(result => {
@@ -113,7 +110,13 @@ class App extends React.Component {
         technology: query
       });
       this.onSearch(query);
-    });
+    })
+    .catch(err => {
+      this.setState({
+        view: 'search',
+        errMsg: err + ''
+      });
+    })
   }
 
   saveQuery(loginData) {
@@ -171,7 +174,9 @@ class App extends React.Component {
           <Header jobs={this.state.jobs}/>
           <div> <h1 id="title"> Surveyor  &#x1F50D; </h1></div>
             {this.state.view === 'search'
-              ? <Start/>
+              ? this.state.errMsg === ''
+                ? <Start errMsg=''/>
+                : <Start errMsg={this.state.errMsg}/>
               : this.state.view === 'loading'
               ? <Loading loadingPrevious={this.state.loadingPrevious}/>
               : this.state.view === 'jobs'

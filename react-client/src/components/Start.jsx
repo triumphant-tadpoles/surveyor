@@ -7,6 +7,10 @@ class Start extends React.Component {
   render () {
     return (
       <div className="dropzone">
+        {this.props.errMsg.length > 0
+         ? <h3> Error analysing Resume! Please try again later</h3>
+         : null
+        }
         <h3>Drag Resume Here</h3>
       </div>
     );
