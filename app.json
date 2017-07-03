@@ -10,9 +10,6 @@
     "INDEED": {
       "required": true
     },
-    "FACEBOOKDEVID": {
-      "required": true
-    },
     "WATSONCONVERTERUSER": {
       "required": true
     },

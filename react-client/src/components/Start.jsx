@@ -7,7 +7,7 @@ class Start extends React.Component {
   render () {
     return (
       <div id="dropzone">
-        <h3>Drag and Drop Resume to search</h3>
+        <h3>Drag Resume Here</h3>
       </div>
     );
   }
