@@ -13,7 +13,7 @@ let natural_language_understanding = new NaturalLanguageUnderstandingV1({
 });
 
 module.exports.analyze = (doc, callback) => {
-  if (!doc.answer_units[0]) {
+  if (!doc) {
     callback('Document error', null);
     return;
   }
