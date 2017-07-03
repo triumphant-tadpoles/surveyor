@@ -1,27 +1,23 @@
 #app {
-  max-width: 700px;
+  max-width: 927px;
   height: 500px;
   margin: 0 auto;
-  border: 5px dashed #afafaf;
   text-align: center;
   color: #333333;
+  padding: 1em;
 }
 
 #header {
   text-align: center;
-  background-color: #33E9FF;
+  background-color: #0E6EB8;
+  text-color: white;
   padding: 0.3em;
   font-weight: bold;
-}
-
-#title {
-  border: 5px solid red;
 }
 
 #login {
   margin: 1em;
 }
-
 
 #dropzone {
   position: absolute;
@@ -30,11 +26,15 @@
   right: 0;
   top: 0;
   bottom: 0;
-  border: 5px solid green;
 }
 
 .loading-box {
   padding-top: 7em;
+}
+
+.another {
+  border: 4px dashed #afafaf;
+  padding: 0.3em;
 }
 
 

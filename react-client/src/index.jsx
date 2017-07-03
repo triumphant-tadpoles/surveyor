@@ -68,7 +68,7 @@ class App extends React.Component {
         })
         console.log('ERROR');
       });
-    }, 3000)
+    }, 4000)
   }
 
   onDragEnter() {
@@ -180,7 +180,7 @@ class App extends React.Component {
         { dropzoneActive && <div style={overlayStyle}>Release to Search</div> }
         <div>
           <Header jobs={this.state.jobs}/>
-          <div> <h1 id="title"> Surveyor </h1></div>
+          <div> <h1 id="title"> Surveyor  &#x1F50D; </h1></div>
             {this.state.view === 'search'
               ? <Start/>
               : this.state.view === 'loading'

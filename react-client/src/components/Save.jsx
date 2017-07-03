@@ -13,10 +13,9 @@ class Save extends React.Component {
           appId='134148277165166'
           autoLoad={true}
           size='small'
-          textButton='Save results'
-          fields='name'
+          textButton='Save results with facebook'
           callback={this.props.saveQuery}
-        />
+        /> <span className="another">or drop another resume</span>
       </div>
     )
   }
