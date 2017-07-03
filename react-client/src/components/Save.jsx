@@ -8,14 +8,13 @@ class Save extends React.Component {
 
   render() {
     return(
-      <div>
-        <div>
-          Save your search with Facebook Login
-        </div>
+      <div align='right'>
         <FacebookLogin
           appId='134148277165166'
           autoLoad={true}
-          fields='name, email, picture'
+          size='small'
+          textButton='Save results'
+          fields='name'
           callback={this.props.saveQuery}
         />
       </div>

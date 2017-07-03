@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const indeed = require('./externals/indeed.js');
 
-const dbTest = require('../database-postgresql/index.js');
 const multer = require('multer');
 const path = require('path');
 const upload = multer();
@@ -14,6 +13,8 @@ pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
 const docConverter = require('./externals/docconverter.js');
+const docAnalyzer = require('./externals/naturalLanguageUnderstanding.js');
+
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -46,9 +47,11 @@ app.post('/', (req, res, next) => {
 });
 
 
-app.post('/upload', (req, res, next)=>{
-  // console.log('inside upload..');
-  docConverter.convertDoc(req, res);
+app.post('/upload', (req, res, next) => {
+  docConverter.convertDoc(req, response => {
+    docAnalyzer.analyze(response, keywords => {
+      res.send(keywords);
+  })});
 });
 
 
@@ -75,7 +78,7 @@ app.post('/saveQuery', (req, res) => {
   db.query(`SELECT * FROM users WHERE facebook_id = '${req.body.id}'`)
     .then(result => {
       if (result.length === 0) {
-        db.query(`INSERT INTO "public"."users"("facebook_id") VALUES('${req.body.id}') RETURNING "id", "username", "facebook_id";`);
+        db.query(`INSERT INTO "public"."users"("facebook_id") VALUES('${req.body.id}') RETURNING "id", "facebook_id";`);
         throw notInDb;
       }
       return result[0].id;

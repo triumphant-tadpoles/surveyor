@@ -10,7 +10,7 @@ let natural_language_understanding = new NaturalLanguageUnderstandingV1({
   'version_date': '2017-02-27'
 });
 
-module.exports.analyze = (doc, req, res) => {
+module.exports.analyze = (doc, callback) => {
   doc.answer_units[0].content[0].text
   var parameters = {
     'text': doc.answer_units[0].content[0].text,
@@ -35,16 +35,9 @@ module.exports.analyze = (doc, req, res) => {
       let keywords = result.keywords.map((keyword) => {
         return keyword.text;
       });
-      //David: 
-      //save keywords array to db here.
-
-      let userReq = {
-        body: keywords.join(','),
-        ip: req.headers['x-forwarded-for'],
-        userAgent: req.get('user-agent')
-      }
+      
       //console.log('calling indeed.. userReq=', userReq);
-      indeed.indeed(userReq, res, null);
+      callback(keywords);
     }
   });
 }

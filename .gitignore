@@ -1,4 +1,5 @@
 node_modules
 react-client/dist/bundle.js
 config.js
+server/temp/
 .DS_store

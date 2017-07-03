@@ -102,14 +102,12 @@ class App extends React.Component {
       if (result.error) {
         throw err;
       }
+      var query = result.join(', ');
       this.setState({
-        jobs: result.results,
-        view: 'jobs'
+        technology: query
       });
-    })
-    .catch(err => {
-      console.log('ERROR:', err);
-    })
+      this.onSearch(query);
+    });
   }
 
   saveQuery(loginData) {
@@ -121,7 +119,7 @@ class App extends React.Component {
       body: JSON.stringify({
         id: loginData.id,
         query: this.state.technology
-      })
+      }),
     });
   }
 
