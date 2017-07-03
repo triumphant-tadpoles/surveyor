@@ -30,7 +30,11 @@ let indeedFetch = (data, res, next) => {
     else return response.json();
   }).then((rjson, error) => {
     if (error) throw error;
-    else res.send(rjson);
+    else {
+      let newStr = JSON.stringify(rjson).replace(/<b>/g, "");
+      newStr = newStr.replace(/<\/b>/g, "");
+      res.send(JSON.parse(newStr));
+    }
   }).catch(error => {
     res.send(error);
   });
