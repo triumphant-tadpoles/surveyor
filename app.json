@@ -12,6 +12,18 @@
     },
     "FACEBOOKDEVID": {
       "required": true
+    },
+    "WATSONCONVERTERUSER": {
+      "required": true
+    },
+    "WATSONCONVERTERPASS": {
+      "required": true
+    },
+    "WATSONANALYZERUSER": {
+      "required": true
+    },
+    "WATSONANALYZERPASS": {
+      "required": true
     }
   },
   "formation": {

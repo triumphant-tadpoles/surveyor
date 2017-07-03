@@ -1,12 +1,14 @@
-const discoveryV1 = require('watson-developer-cloud').DiscoveryV1;
 const indeed = require('./indeed.js');
 const fs = require('fs');
 const path = require('path');
+const analyzerUser = process.env.WATSONANALYZERUSER; //db72ffe4-c5f3-4719-9660-4c70b9a23b58
+const analyzerPass = process.env.WATSONANALYZERPASS; //z5GHIPIXtFQb
+
 let serverPath = path.join(__dirname, '../');
 let NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 let natural_language_understanding = new NaturalLanguageUnderstandingV1({
-  'username': 'db72ffe4-c5f3-4719-9660-4c70b9a23b58',
-  'password': 'z5GHIPIXtFQb',
+  'username': analyzerUser,
+  'password': analyzerPass,
   'version_date': '2017-02-27'
 });
 

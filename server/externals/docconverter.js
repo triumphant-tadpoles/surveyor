@@ -3,12 +3,14 @@ var DocumentConversionV1 = require('watson-developer-cloud/document-conversion/v
 const FormData = require('form-data');
 const fs = require('file-system');
 const docAnalyzer = require('./naturalLanguageUnderstanding.js');
+const converterUser = process.env.WATSONCONVERTERUSER; //18c7c47c-faf3-44c9-abd1-7f8a67d19019
+const converterPass = process.env.WATSONCONVERTERPASS; //5mgcy7uIQc5B
 
 let convertDoc = (doc, callback) => {
 
 	var document_conversion = new DocumentConversionV1({
-  	username:     '18c7c47c-faf3-44c9-abd1-7f8a67d19019',
-  	password:     '5mgcy7uIQc5B',
+  	username:     converterUser,
+  	password:     converterPass,
   	version_date: '2015-12-01'
 	});
 
