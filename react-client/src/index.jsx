@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import Search from './components/Search.jsx';
 import JobList from './components/JobList.jsx';
 import JobListItem from './components/JobListItem.jsx';
 import Save from './components/Save.jsx';

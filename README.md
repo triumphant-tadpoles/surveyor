@@ -42,7 +42,7 @@ yarn run react-dev
 ```
 
 Deployment: 
-Heroku has deployment problems. If application error occurs <file>.mmdb not found, change the node version and redeploy. The problem should go away.
+Heroku has deployment problems. If application error occurs with error code: "'./lib/node_mmdb.node' not found", change the node version and redeploy. The problem should go away.
 
 Keys:
 Change anything that has process.env.<Name> with the actual keys (Except for postgresSQL. The key is already set up in package.JSON). CHANGE IT BACK BEFORE COMMITING

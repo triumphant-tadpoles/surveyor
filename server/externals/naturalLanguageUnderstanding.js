@@ -1,8 +1,8 @@
 const indeed = require('./indeed.js');
 const fs = require('fs');
 const path = require('path');
-const analyzerUser = process.env.WATSONANALYZERUSER; //db72ffe4-c5f3-4719-9660-4c70b9a23b58
-const analyzerPass = process.env.WATSONANALYZERPASS; //z5GHIPIXtFQb
+const analyzerUser = process.env.WATSONANALYZERUSER;
+const analyzerPass = process.env.WATSONANALYZERPASS;
 
 let serverPath = path.join(__dirname, '../');
 let NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
@@ -32,16 +32,12 @@ module.exports.analyze = (doc, callback) => {
   }
   natural_language_understanding.analyze(parameters, function(err, result) {
     if (err) {
-      //console.log('error:', err);
       callback(err, null);
     }
     else {
-      //console.log('Response from ANALYZER...');
       let keywords = result.keywords.map((keyword) => {
         return keyword.text;
       });
-      
-      //console.log('calling indeed.. userReq=', userReq);
       callback(null, keywords);
     }
   });
