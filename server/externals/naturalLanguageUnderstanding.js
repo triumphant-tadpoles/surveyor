@@ -7,8 +7,8 @@ const analyzerPass = process.env.WATSONANALYZERPASS; //z5GHIPIXtFQb
 let serverPath = path.join(__dirname, '../');
 let NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 let natural_language_understanding = new NaturalLanguageUnderstandingV1({
-  'username': '713ca82a-8b4e-41d6-ada6-6b62caaf5d8e',
-  'password': 'DF7B72pfDIOe',
+  'username': analyzerUser,
+  'password': analyzerPass,
   'version_date': '2017-02-27'
 });
 
