@@ -7,8 +7,8 @@ const analyzerPass = process.env.WATSONANALYZERPASS; //z5GHIPIXtFQb
 let serverPath = path.join(__dirname, '../');
 let NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 let natural_language_understanding = new NaturalLanguageUnderstandingV1({
-  'username': analyzerUser,
-  'password': analyzerPass,
+  'username': '713ca82a-8b4e-41d6-ada6-6b62caaf5d8e',
+  'password': 'DF7B72pfDIOe',
   'version_date': '2017-02-27'
 });
 
@@ -31,8 +31,10 @@ module.exports.analyze = (doc, callback) => {
     'language': 'en'
   }
   natural_language_understanding.analyze(parameters, function(err, result) {
-    if (err)
-      console.log('error:', err);
+    if (err) {
+      //console.log('error:', err);
+      callback(err, null);
+    }
     else {
       //console.log('Response from ANALYZER...');
       let keywords = result.keywords.map((keyword) => {
@@ -40,7 +42,7 @@ module.exports.analyze = (doc, callback) => {
       });
       
       //console.log('calling indeed.. userReq=', userReq);
-      callback(keywords);
+      callback(null, keywords);
     }
   });
 }
