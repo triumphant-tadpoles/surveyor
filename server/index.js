@@ -48,9 +48,15 @@ app.post('/', (req, res, next) => {
 
 
 app.post('/upload', (req, res, next) => {
-  docConverter.convertDoc(req, response => {
-    docAnalyzer.analyze(response, keywords => {
-      res.send(keywords);
+  docConverter.convertDoc(req, (error, response) => {
+    if (error) {
+      res.send(error);
+    }
+    docAnalyzer.analyze(response, (err, keywords) => {
+    if (err) {
+      res.send(error);
+    }
+    res.send(keywords);
   })});
 });
 
