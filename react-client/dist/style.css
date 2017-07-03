@@ -15,6 +15,13 @@
   border-style: dashed;
 }
 
+#login {
+  margin: 1em;
+}
+
+#title {
+  margin-left: 1em;
+}
 /* CSS LOADER */
 .cssload-loader {
   position: relative;
