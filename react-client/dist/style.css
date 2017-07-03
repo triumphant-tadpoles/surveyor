@@ -1,12 +1,9 @@
-
-
 #app {
   max-width: 927px;
   height: 500px;
   margin: 0 auto;
   text-align: center;
   color: #333333;
-  padding: 1em;
 }
 
 #header {
@@ -20,7 +17,6 @@
 #login {
   margin: 1em;
 }
-
 
 .dropzone {
   position: absolute;
@@ -56,6 +52,8 @@
   left: 0;
   background: rgba(0,0,0,0.7);
   color: #ffffff;
+  font-size: 20px;
+  padding: 5em;
 }
 
 

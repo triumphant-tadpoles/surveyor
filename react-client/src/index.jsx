@@ -20,7 +20,8 @@ class App extends React.Component {
       files: [],
       dropzoneActive: false,
       loadingPrevious: false,
-      errMsg: ''
+      errMsg: '',
+      activateBlur: false
     };
     this.onSearch = this.onSearch.bind(this);
     this.saveQuery = this.saveQuery.bind(this);
@@ -73,19 +74,22 @@ class App extends React.Component {
 
   onDragEnter() {
     this.setState({
-      dropzoneActive: true
+      dropzoneActive: true,
+      activateBlur: true
     });
   }
 
   onDragLeave() {
     this.setState({
-      dropzoneActive: false
+      dropzoneActive: false,
+      activateBlur: false
     });
   }
 
   onDrop(files) {
     this.setState({
-      view: 'loading'
+      view: 'loading',
+      activateBlur: false
     });
     let formData = new FormData();
     this.setState({
@@ -159,6 +163,18 @@ class App extends React.Component {
 
   render () {
     const { accept, files, dropzoneActive } = this.state;
+
+    var style = {};
+    if (this.state.activateBlur) {
+      style = {
+        '-webkit-filter': 'blur(3px)',
+        '-moz-filter': 'blur(3px)',
+        '-o-filter': 'blur(3px)',
+        '-ms-filter': 'blur(3px)',
+        'filter': 'blur(3px)'
+      };
+    }
+
     return (
       <Dropzone
         disableClick
@@ -169,7 +185,7 @@ class App extends React.Component {
         onDragLeave={this.onDragLeave.bind(this)}
       >
         { dropzoneActive && <div className="overlay">Release to Search</div> }
-        <div>
+        <div style={style}>
           <Header jobs={this.state.jobs}/>
           <div> <h1 id="title"> Surveyor  &#x1F50D; </h1></div>
             {this.state.view === 'search'
