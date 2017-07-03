@@ -9,12 +9,14 @@ class JobList extends React.Component {
 
 	render() {
 		return (
-			<div className="job-list">
-				<div>
-					<Save saveQuery={this.props.saveQuery}/>
-				</div>
-				<div className="ui cards">
-					{this.props.jobList.map(item => <JobListItem jobListItem = {item}/>)}
+			<div className="dropzone">
+				<div className="job-list">
+					<div>
+						<Save saveQuery={this.props.saveQuery}/>
+					</div>
+					<div className="ui cards">
+						{this.props.jobList.map(item => <JobListItem jobListItem = {item}/>)}
+					</div>
 				</div>
 			</div>
 		);

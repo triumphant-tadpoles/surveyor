@@ -25,7 +25,7 @@ module.exports.indeed = (details, res, next) => {
 }
 
 let indeedFetch = (data, res, next) => {
-  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${data.body}&l=${data.city}%2C+${data.state}&userAgent=${data.userAgent}&limit=100&fromage=10&radius=100`, {
+  fetch(`http://api.indeed.com/ads/apisearch?format=json&v=2&publisher=${indeed}&q=${data.body}&l=${data.city}%2C+${data.state}&userAgent=${data.userAgent}&limit=24&fromage=10&radius=100`, {
     method: 'GET'
   }).then((response, error) =>{
     if (error) throw error;
